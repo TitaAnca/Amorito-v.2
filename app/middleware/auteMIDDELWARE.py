@@ -1,25 +1,21 @@
-import jwt
 from flask import request, jsonify
-from functools import wraps
-from app.config import SECRET_KEY
+from app.utils.tokenUtils import verificar_token
 
-def verificar_token(f):
-    @wraps(f)
-    def decorador(*args, **kwargs):
-        token = request.headers.get('Authorization')
+def autenticar_request():
+    """Middleware para verificar que la solicitud tenga un token válido."""
 
-        if not token or not token.startswith("Bearer "):
-            return jsonify({"error": "Token no proporcionado o inválido"}), 401
+    # Obtener el token del encabezado Authorization
+    token = request.headers.get('Authorization')
 
-        try:
-            token = token.split(" ")[1]  # Eliminar el prefijo "Bearer"
-            datos = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
-            request.usuario_id = datos["usuario_id"]
-        except jwt.ExpiredSignatureError:
-            return jsonify({"error": "Token expirado"}), 401
-        except jwt.InvalidTokenError:
-            return jsonify({"error": "Token inválido"}), 401
+    # Si no hay token en la solicitud, devolver un error
+    if not token:
+        return jsonify({"message": "Token no proporcionado"}), 401
 
-        return f(*args, **kwargs)
+    # Verificar el token
+    resultado = verificar_token(token)
 
-    return decorador
+    if 'message' in resultado:  # Si hubo un error en la validación del token
+        return jsonify(resultado), 401
+
+    # Si el token es válido, agregar la información del usuario al contexto de la solicitud
+    request.usuario_id = resultado['usuario_id']
