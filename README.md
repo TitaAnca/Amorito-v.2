@@ -6,9 +6,9 @@ Todos los comandos se han de ejecutar en la terminal del visual
 esenciales
 
 
-git remote add origin <"nombre del repositorio (sin el .git)">
+git remote add origin <(https://github.com/TitaAnca/Amorito-v.2)>
 
-git pull 
+git pull <https://github.com/TitaAnca/Amorito-v.2> main
 
 1. git add <nombre del archivo "ejemplo.html">
 2. git commit <ejemplo.html>
