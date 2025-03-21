@@ -6,46 +6,64 @@ usuario_controller = Blueprint('usuario_controller', __name__)
 
 @usuario_controller.route('registro/', methods=['POST'])
 def registrar_usuario():
-    # Recibir los datos del usuario en formato JSON
     data = request.get_json()
 
-    # Verificar que todos los campos estén presentes
     if not data.get('nombre') or not data.get('email') or not data.get('contraseña'):
         return jsonify({"message": "Todos los campos son requeridos"}), 400
-
-    # Validar el formato del email
+    
     if not validar_email(data['email']):
         return jsonify({"message": "El formato del correo electrónico no es válido"}), 400
 
-    # Validar la contraseña (mínimo 8 caracteres)
     if not validar_contraseña(data['contraseña']):
         return jsonify({"message": "La contraseña debe tener al menos 8 caracteres"}), 400
-
-    # Cargar los usuarios desde el archivo JSON
+    
     usuarios = cargar_datos('app/db/usuarios.json')
 
-    # Verificar si el email ya está registrado
     for usuario in usuarios:
         if usuario['email'] == data['email']:
             return jsonify({"message": "El correo ya está registrado"}), 400
     
-    # Crear un nuevo usuario
     nuevo_usuario = {
-        "id": len(usuarios) + 1,  # Asignar un ID único, basado en el tamaño actual
+        "id": len(usuarios) + 1,
         "nombre": data['nombre'],
         "email": data['email'],
-        "contraseña": data['contraseña']  # En un entorno real, aquí deberías cifrar la contraseña
+        "contraseña": data['contraseña'] 
     }
 
-    # Agregar el nuevo usuario a la lista de usuarios
     usuarios.append(nuevo_usuario)
 
-    # Guardar los datos actualizados en el archivo JSON
     guardar_datos('app/db/usuarios.json', usuarios)
 
-    # Devolver una respuesta con los datos del nuevo usuario
     return jsonify({
         "message": "Usuario registrado con éxito", 
         "usuario": nuevo_usuario
     }), 201
 
+
+@usuario_controller.route('/login', methods=['POST'])
+def login_usuario():
+    # Recibir los datos del usuario en formato JSON
+    data = request.get_json()
+
+    # Validar que se hayan enviado los datos
+    if not data.get('email') or not data.get('contraseña'):
+        return jsonify({"message": "El correo y la contraseña son requeridos"}), 400
+
+    usuarios = cargar_datos('app/db/usuarios.json')
+
+    # Verificar si el email y la contraseña son correctos
+    for usuario in usuarios:
+        if usuario['email'] == data['email'] and usuario['contraseña'] == data['contraseña']:
+            # Aquí deberías generar un token (JWT) en un entorno real
+            return jsonify({"message": "Login exitoso", "usuario": usuario}), 200
+    
+    # Si no se encuentra el usuario o las credenciales son incorrectas
+    return jsonify({"message": "Credenciales incorrectas"}), 401
+
+
+# <form id="registroForm" action="/api/usuario/registrar" method="POST">
+#   <input type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+#   <input type="email" id="email" name="email" placeholder="Correo electrónico" required> <!-- correo obligatorio -->
+#   <input type="password" id="contraseña" name="contraseña" placeholder="Contraseña" required>
+#   <button type="submit">Registrarse</button>
+# </form> (MANERA DE HACER EL FORMULARIO)
