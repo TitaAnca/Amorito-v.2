@@ -15,41 +15,45 @@ git pull <https://github.com/TitaAnca/Amorito-v.2> main
 3. git push -u origin main
 
 
-my-api/
+Amorito-v.2/
 │
-├── config/           # Archivos de configuración (DB, API keys, etc.)
+├── config/               # Archivos de configuración
+│   └── dbConfig.js       # Configuración general de la "base de datos" (archivos JSON)
 │
-├── controllers/      # Controladores, donde se definen las funciones de las rutas
+├── controllers/          # Controladores que manejan la lógica de negocio
 │   ├── userController.js
-│   ├── authController.js
+│   └── productController.js
 │
-├── models/           # Modelos de base de datos (si usas ORM como Sequelize, Mongoose, etc.)
-│   ├── userModel.js
-│   ├── productModel.js
+├── models/               # Modelos que interactúan con los archivos JSON
+│   ├── userModel.js      # Modelo de usuario (operaciones sobre el archivo JSON de usuarios)
+│   └── productModel.js   # Modelo de producto
 │
-├── routes/           # Definición de rutas (rutas de API)
+├── routes/               # Rutas de la API
 │   ├── userRoutes.js
-│   ├── authRoutes.js
+│   └── productRoutes.js
 │
-├── middleware/       # Middleware (autenticación, validación, etc.)
+├── middleware/           # Middleware para validaciones y autenticación
 │   ├── authMiddleware.js
-│   ├── validateMiddleware.js
+│   └── validateMiddleware.js
 │
-├── services/         # Lógica de negocio (si no está en el controlador)
+├── services/             # Lógica de negocio más compleja
 │   ├── userService.js
-│   ├── paymentService.js
+│   └── productService.js
 │
-├── utils/            # Utilidades (funciones reutilizables)
-│   ├── logger.js
-│   ├── helpers.js
+├── utils/                # Funciones auxiliares, como un logger o manipuladores de archivos JSON
+│   └── fileUtils.js      # Funciones para leer y escribir archivos JSON
 │
-├── public/           # Archivos estáticos (si los hay, como imágenes o documentos)
+├── public/               # Archivos estáticos (si los hay)
 │
-├── tests/            # Pruebas (unitarias, de integración, etc.)
+├── tests/                # Pruebas unitarias de la API
 │   ├── user.test.js
-│   ├── auth.test.js
+│   └── product.test.js
 │
-├── app.js            # Archivo principal de la API (punto de entrada)
-├── package.json      # Dependencias y configuraciones del proyecto
-└── README.md         # Documentación del proyecto
+├── db/                   # Carpeta que almacena los archivos JSON que simulan bases de datos
+│   ├── users.json        # Archivo JSON que contiene todos los usuarios
+│   └── products.json     # Archivo JSON que contiene los productos
+│
+├── app.js                # Archivo principal de la API
+├── package.json          # Dependencias y configuraciones del proyecto
+└── README.md             # Documentación del proyecto
 
