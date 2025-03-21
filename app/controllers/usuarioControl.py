@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 from app.utils.archivosUtils import cargar_datos, guardar_datos
+from utils.validarUtils import validar_email, validar_contraseña
 
 usuario_controller = Blueprint('usuario_controller', __name__)
 
