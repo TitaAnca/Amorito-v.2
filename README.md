@@ -11,7 +11,7 @@ git remote add origin <(https://github.com/TitaAnca/Amorito-v.2)>
 git pull <https://github.com/TitaAnca/Amorito-v.2> main
 
 1. git add <nombre del archivo "ejemplo.html">
-2. git commit <ejemplo.html>
+2. git commit -m <ejemplo.html>
 3. git push -u origin main
 
 
