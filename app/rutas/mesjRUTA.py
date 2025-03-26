@@ -3,7 +3,7 @@ from utils import cargar_db, guardar_db
 
 mensajes_bp = Blueprint('mensajes', __name__)
 
-# 📌 Enviar un mensaje entre usuarios
+# Enviar un mensaje entre usuarios
 @mensajes_bp.route('/enviar', methods=['POST'])
 def enviar_mensaje():
     datos = request.get_json()
@@ -27,7 +27,7 @@ def enviar_mensaje():
     
     return jsonify({"mensaje": "Mensaje enviado con éxito"})
 
-# 📌 Obtener mensajes entre dos usuarios
+#Obtener mensajes entre dos usuarios
 @mensajes_bp.route('/conversacion/<int:id_usuario1>/<int:id_usuario2>', methods=['GET'])
 def obtener_conversacion(id_usuario1, id_usuario2):
     db = cargar_db()
@@ -39,7 +39,7 @@ def obtener_conversacion(id_usuario1, id_usuario2):
     
     return jsonify(mensajes)
 
-# 📌 Eliminar un mensaje (opcional, si se necesita)
+#Eliminar un mensaje (opcional, si se necesita)
 @mensajes_bp.route('/eliminar/<int:index>', methods=['DELETE'])
 def eliminar_mensaje(index):
     db = cargar_db()
