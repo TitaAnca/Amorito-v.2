@@ -77,21 +77,21 @@ def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None):
     usuario_obj.actualizar(contrasena, edad, genero)
 
     # Guardar los usuarios actualizados
-    usuarios = [usuario_obj.a_dict() if usuario['nombre_usuario'] == id_usuario else usuario for usuario in usuarios]
+    usuarios = [usuario_obj.a_dict() if usuario['nombre_usuario'] == nombre_usuario else usuario for usuario in usuarios]
     guardar_usuarios(usuarios)
     
     return True
 
     # Eliminar un usuario por nombre de usuario
-    def eliminar_usuario(id_usuario):
-        usuarios = obtener_todos_usuarios()
+def eliminar_usuario(id_usuario):
+    usuarios = obtener_todos_usuarios()
 
-        # Buscar el índice del usuario en la lista
-        usuario_a_eliminar = next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
+    # Buscar el índice del usuario en la lista
+    usuario_a_eliminar = next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
 
-        if usuario_a_eliminar:
-            usuarios.remove(usuario_a_eliminar)  # Eliminar el usuario de la lista
-            guardar_usuarios(usuarios)  # Guardar el archivo actualizado
-            return True
-        else:
-            return False  # Si no se encuentra el usuario, no se puede eliminar
+    if usuario_a_eliminar:
+        usuarios.remove(usuario_a_eliminar)  # Eliminar el usuario de la lista
+        guardar_usuarios(usuarios)  # Guardar el archivo actualizado
+        return True
+    else:
+        return False  # Si no se encuentra el usuario, no se puede eliminar
