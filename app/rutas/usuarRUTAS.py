@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.controllers.usuarioControlador import (
+from app.controllers.usuarioControl import (
     actualizar_usuario_controlador,
     obtener_usuario_controlador,
     eliminar_usuario_controlador
