@@ -57,7 +57,7 @@ Amorito-v.2/
 │   ├── images/              # Imágenes de perfil de los usuarios, fotos compartidas
 │   ├── css/                 # Hojas de estilo CSS para la web (si usas plantillas)
 │   ├── js/                  # Archivos JavaScript para la interacción en frontend
-│   └── index.html           # Página HTML principal si la sirves desde la misma API
+│   └── html/           # Página HTML principal si la sirves desde la misma API
 │
 ├── tests/                   # Pruebas unitarias de la API
 │   ├── test_auth.py         # Pruebas para el login y autenticación
