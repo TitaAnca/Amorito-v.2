@@ -23,10 +23,18 @@ def validar_genero(genero):
         return False
     return True
 
+def validar_edad(edad):
+    if edad<18 and edad>90:
+        return False
+    return True
+
 # Registrar un nuevo usuario
 def registrar_usuario(id_usuario ,nombre_usuario, contrasena, edad, genero):
     if not validar_genero(genero):
         return False  # Género no válido
+
+    if not validar_edad(edad):
+        return False #Edad no válida
 
     usuarios = obtener_todos_usuarios()
 
@@ -50,3 +58,26 @@ def iniciar_sesion(id_usuario, contrasena):
     if usuario and usuario['contrasena'] == contrasena:
         return True
     return False
+
+def obtener_usuario_por_nombre(nombre_usuario):
+    usuarios = obtener_todos_usuarios()
+    usuario = next((usuario for usuario in usuarios if usuario['nombre_usuario'] == nombre_usuario), None)
+    return usuario
+
+def actualizar_usuario(nombre_usuario, contrasena=None, edad=None, genero=None):
+    usuarios = obtener_todos_usuarios()
+
+    # Buscar el usuario
+    usuario = next((usuario for usuario in usuarios if usuario['nombre_usuario'] == nombre_usuario), None)
+
+    if not usuario:
+        return False  # Usuario no encontrado
+
+    usuario_obj = Usuario(**usuario)
+    usuario_obj.actualizar(contrasena, edad, genero)
+
+    # Guardar los usuarios actualizados
+    usuarios = [usuario_obj.a_dict() if usuario['nombre_usuario'] == nombre_usuario else usuario for usuario in usuarios]
+    guardar_usuarios(usuarios)
+    
+    return True
