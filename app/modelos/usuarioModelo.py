@@ -15,9 +15,9 @@ class Usuario:
             "genero": self.genero
         }
     def actualizar(self, contrasena=None, edad=None, genero=None):
-    if contrasena:
-        self.contrasena = contrasena
-    if edad:
-        self.edad = edad
-    if genero:
-        self.genero = genero
+        if contrasena:
+            self.contrasena = contrasena
+        if edad:
+            self.edad = edad
+        if genero:
+            self.genero = genero

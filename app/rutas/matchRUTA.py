@@ -1,5 +1,5 @@
 from flask import Blueprint, request, jsonify
-from servicios.matchServicio import MatchServicio
+from app.servicios.matchServicio import MatchServicio
 
 # Crear blueprint para las rutas de los matches
 match_bp = Blueprint('match', __name__)

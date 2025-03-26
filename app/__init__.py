@@ -1,9 +1,9 @@
 from flask import Flask
-from .rutas.usuarRUTAS import usuario_bp
-from .rutas.mesjRUTA import mensaje_bp
-from .rutas.matchRUTA import match_bp
-from .rutas.autenRUTA import autent_bp
-from .config import DevelopmentConfig  # Aquí importas la configuración
+from app.rutas.usuarRUTAS import usuario_bp
+from app.rutas.mesjRUTA import mensaje_bp
+from app.rutas.matchRUTA import match_bp
+from app.rutas.autenRUTA import autent_bp
+from app.config import DevelopmentConfig  # Aquí importas la configuración
 
 def create_app():
     # Crear la instancia de la aplicación Flask

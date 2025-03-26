@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.services.messageService import ServicioMensaje
+from app.servicios.mensajeServicio import ServicioMensaje
 from datetime import datetime
 
 servicio_mensaje = ServicioMensaje()
