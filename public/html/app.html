@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Citas - Perfil</title>
+    <link rel="stylesheet" href="Registro.css"> <!-- Estilos personalizados -->
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- Perfil -->
+        <div class="perfil-section">
+            <h1>Mi Perfil</h1>
+            <div class="perfil-info">
+                <img src="images/profile.jpg" alt="Imagen de Perfil" class="perfil-img" id="perfil-img">
+                <div class="perfil-details">
+                    <h2 id="perfil-nombre">Juan Pérez</h2>
+                    <p id="perfil-biografia">Biografía: Me encanta viajar y conocer gente nueva.</p>
+                    <p>Edad: <span id="perfil-edad">28</span> años</p>
+                    <button id="editarPerfilBtn">Editar Perfil</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección de Mensajes -->
+        <div class="messages-section">
+            <h2>Mis Mensajes</h2>
+            <div id="messages-container">
+                <!-- Aquí se mostrarán los mensajes -->
+            </div>
+            <form id="mensajeForm">
+                <textarea id="mensajeInput" placeholder="Escribe tu mensaje..." required></textarea>
+                <button type="submit">Enviar Mensaje</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script> <!-- Script de la app -->
+</body>
+</html>
