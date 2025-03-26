@@ -17,3 +17,15 @@ def actualizar_usuario_controlador():
     else:
         return jsonify({"mensaje": "Usuario no encontrado"}), 404
 
+def obtener_usuario_controlador(nombre_usuario):
+    usuario = obtener_usuario_por_nombre(nombre_usuario)
+    if usuario:
+        return jsonify(usuario), 200  # Si lo encuentra, devuelve los datos
+    else:
+        return jsonify({"mensaje": "Usuario no encontrado"}), 404  # Si no lo encuentra, mensaje de error
+
+def eliminar_usuario_controlador(nombre_usuario):
+    if eliminar_usuario(nombre_usuario):
+        return jsonify({"mensaje": "Usuario eliminado correctamente"}), 200
+    else:
+        return jsonify({"mensaje": "No se pudo eliminar el usuario"}), 400
