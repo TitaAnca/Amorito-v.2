@@ -1,6 +1,6 @@
-from modelos.matchModelo import Match
-from modelos.usuarioModelo import Usuario
-from controllers.matchControl import MatchControl
+from app.modelos.matchModelo import Match
+from app.modelos.usuarioModelo import Usuario
+from app.controllers.matchControl import MatchControl
 
 class MatchServicio:
     @staticmethod
