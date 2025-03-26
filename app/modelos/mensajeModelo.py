@@ -1,14 +1,14 @@
-class Message:
-    def __init__(self, sender_id, receiver_id, content, timestamp):
-        self.sender_id = sender_id
-        self.receiver_id = receiver_id
-        self.content = content
+class Mensaje:
+    def __init__(self, id_emisor, id_receptor, contenido, timestamp):
+        self.id_emisor = id_emisor
+        self.id_receptor = id_receptor
+        self.contenido = contenido
         self.timestamp = timestamp
 
-    def to_dict(self):
+    def a_dict(self):
         return {
-            "sender_id": self.sender_id,
-            "receiver_id": self.receiver_id,
-            "content": self.content,
+            "id_emisor": self.id_emisor,
+            "id_receptor": self.id_receptor,
+            "contenido": self.contenido,
             "timestamp": self.timestamp,
         }
