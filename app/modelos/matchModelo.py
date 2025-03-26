@@ -1,13 +1,29 @@
 import json
-from utils import cargar_db, guardar_db
-from modelos.usuarioModelo import Usuario
+
+archivo_db = "base_datos.json"  # Ruta del archivo JSON para simular la base de datos
 
 class Match:
     def __init__(self, id_usuario1, id_usuario2):
         self.id_usuario1 = id_usuario1
         self.id_usuario2 = id_usuario2
 
-    def obtener_rango_edad(self, edad):
+    @staticmethod
+    def cargar_db():
+        """Carga la base de datos desde el archivo JSON."""
+        try:
+            with open(archivo_db, "r") as archivo:
+                return json.load(archivo)
+        except (FileNotFoundError, json.JSONDecodeError):
+            return {"usuarios": [], "coincidencias": []}
+    
+    @staticmethod
+    def guardar_db(datos):
+        """Guarda los datos en el archivo JSON."""
+        with open(archivo_db, "w") as archivo:
+            json.dump(datos, archivo, indent=4)
+    
+    @staticmethod
+    def obtener_rango_edad(edad):
         """Determina el rango de edad del usuario."""
         if 18 <= edad <= 25:
             return "18-25"
@@ -17,58 +33,39 @@ class Match:
             return "36-80"
         return None
 
-    def guardar(self):
-        db = cargar_db()
+    @classmethod
+    def guardar(cls, self):
+        """Guarda el match en la base de datos."""
+        db = cls.cargar_db()
+        # Verificar que no exista ya el match
+        for match in db['coincidencias']:
+            if (match['id_usuario1'] == self.id_usuario1 and match['id_usuario2'] == self.id_usuario2) or \
+               (match['id_usuario1'] == self.id_usuario2 and match['id_usuario2'] == self.id_usuario1):
+                return {"mensaje": "El match ya existe."}
 
-        # Obtener la información de los usuarios
-        usuario1 = next((user for user in db["usuarios"] if user["id"] == self.id_usuario1), None)
-        usuario2 = next((user for user in db["usuarios"] if user["id"] == self.id_usuario2), None)
-
-        if not usuario1 or not usuario2:
-            return {"mensaje": "Uno o ambos usuarios no existen"}, 404
-
-        # Obtener los rangos de edad de ambos usuarios
-        rango1 = self.obtener_rango_edad(usuario1["edad"])
-        rango2 = self.obtener_rango_edad(usuario2["edad"])
-
-        if rango1 != rango2:
-            return {"mensaje": "Los usuarios no están en el mismo rango de edad"}, 400
-
-        # Verificar si el match ya existe
-        for match in db["matches"]:
-            if (match["id_usuario1"] == self.id_usuario1 and match["id_usuario2"] == self.id_usuario2) or \
-               (match["id_usuario1"] == self.id_usuario2 and match["id_usuario2"] == self.id_usuario1):
-                return {"mensaje": "El match ya existe"}
-
-        db["matches"].append({
+        nuevo_match = {
             "id_usuario1": self.id_usuario1,
             "id_usuario2": self.id_usuario2
-        })
-        guardar_db(db)
+        }
+        db['coincidencias'].append(nuevo_match)
+        cls.guardar_db(db)
         return {"mensaje": "Match guardado con éxito"}
 
-    @staticmethod
-    def obtener_matches(id_usuario):
+    @classmethod
+    def obtener_matches(cls, id_usuario):
         """Obtiene todos los matches de un usuario."""
-        db = cargar_db()
-        return [
-            match for match in db["matches"]
-            if match["id_usuario1"] == id_usuario or match["id_usuario2"] == id_usuario
-        ]
+        db = cls.cargar_db()
+        matches = [match for match in db['coincidencias'] if match['id_usuario1'] == id_usuario or match['id_usuario2'] == id_usuario]
+        return matches
 
-    @staticmethod
-    def eliminar_match(id_usuario1, id_usuario2):
+    @classmethod
+    def eliminar_match(cls, id_usuario1, id_usuario2):
         """Elimina un match entre dos usuarios."""
-        db = cargar_db()
-        nuevo_lista_matches = [
-            match for match in db["matches"]
-            if not ((match["id_usuario1"] == id_usuario1 and match["id_usuario2"] == id_usuario2) or
-                    (match["id_usuario1"] == id_usuario2 and match["id_usuario2"] == id_usuario1))
-        ]
-
-        if len(nuevo_lista_matches) == len(db["matches"]):
-            return {"mensaje": "No se encontró el match"}, 404
-
-        db["matches"] = nuevo_lista_matches
-        guardar_db(db)
+        db = cls.cargar_db()
+        match = next((m for m in db['coincidencias'] if m['id_usuario1'] == id_usuario1 and m['id_usuario2'] == id_usuario2), None)
+        if not match:
+            return {"mensaje": "El match no existe."}
+        
+        db['coincidencias'].remove(match)
+        cls.guardar_db(db)
         return {"mensaje": "Match eliminado con éxito"}

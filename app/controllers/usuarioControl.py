@@ -1,6 +1,9 @@
 from flask import request
 from flask import jsonify
-from app.servicios.usuarioServicio import obtener_usuario_por_nombre, eliminar_usuario, actualizar_usuario
+from app.servicios.usuarioServicio import(
+    obtener_usuario_por_nombre, 
+    eliminar_usuario, 
+    actualizar_usuario)
 
 def actualizar_usuario_controlador():
     datos = request.get_json()
@@ -14,7 +17,7 @@ def actualizar_usuario_controlador():
     if not id_usuario:
         return jsonify({"mensaje": "El nombre de usuario es obligatorio"}), 400
 
-    if actualizar_usuario(id_usuario, contrasena, edad, genero):
+    if actualizar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero):
         return jsonify({"mensaje": "Datos del usuario actualizados correctamente"}), 200
     else:
         return jsonify({"mensaje": "Usuario no encontrado"}), 404
