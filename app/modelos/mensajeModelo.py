@@ -1,39 +1,14 @@
-import json
-from utils import cargar_db, guardar_db
-from datetime import datetime
-
 class Mensaje:
-    def __init__(self, remitente, destinatario, contenido, timestamp=None):
-        self.remitente = remitente
-        self.destinatario = destinatario
+    def __init__(self, id_emisor, id_receptor, contenido, timestamp):
+        self.id_emisor = id_emisor
+        self.id_receptor = id_receptor
         self.contenido = contenido
-        self.timestamp = timestamp or datetime.utcnow().isoformat()
+        self.timestamp = timestamp
 
-    def guardar(self):
-        db = cargar_db()
-        db["mensajes"].append({
-            "remitente": self.remitente,
-            "destinatario": self.destinatario,
+    def a_dict(self):
+        return {
+            "id_emisor": self.id_emisor,
+            "id_receptor": self.id_receptor,
             "contenido": self.contenido,
-            "timestamp": self.timestamp
-        })
-        guardar_db(db)
-        return self
-
-    @staticmethod
-    def obtener_conversacion(id_usuario1, id_usuario2):
-        db = cargar_db()
-        return [
-            mensaje for mensaje in db["mensajes"]
-            if (mensaje["remitente"] == id_usuario1 and mensaje["destinatario"] == id_usuario2) or
-               (mensaje["remitente"] == id_usuario2 and mensaje["destinatario"] == id_usuario1)
-        ]
-
-    @staticmethod
-    def eliminar_mensaje(index):
-        db = cargar_db()
-        if 0 <= index < len(db["mensajes"]):
-            db["mensajes"].pop(index)
-            guardar_db(db)
-            return True
-        return False
+            "timestamp": self.timestamp,
+        }
