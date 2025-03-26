@@ -59,16 +59,16 @@ def iniciar_sesion(id_usuario, contrasena):
         return True
     return False
 
-def obtener_usuario_por_nombre(nombre_usuario):
+def obtener_usuario_por_nombre(id_usuario):
     usuarios = obtener_todos_usuarios()
-    usuario = next((usuario for usuario in usuarios if usuario['nombre_usuario'] == nombre_usuario), None)
+    usuario = next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
     return usuario
 
-def actualizar_usuario(nombre_usuario, contrasena=None, edad=None, genero=None):
+def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None):
     usuarios = obtener_todos_usuarios()
 
     # Buscar el usuario
-    usuario = next((usuario for usuario in usuarios if usuario['nombre_usuario'] == nombre_usuario), None)
+    usuario = next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
 
     if not usuario:
         return False  # Usuario no encontrado
@@ -83,11 +83,11 @@ def actualizar_usuario(nombre_usuario, contrasena=None, edad=None, genero=None):
     return True
 
     # Eliminar un usuario por nombre de usuario
-    def eliminar_usuario(nombre_usuario):
+    def eliminar_usuario(id_usuario):
         usuarios = obtener_todos_usuarios()
 
         # Buscar el índice del usuario en la lista
-        usuario_a_eliminar = next((usuario for usuario in usuarios if usuario['nombre_usuario'] == nombre_usuario), None)
+        usuario_a_eliminar = next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
 
         if usuario_a_eliminar:
             usuarios.remove(usuario_a_eliminar)  # Eliminar el usuario de la lista
