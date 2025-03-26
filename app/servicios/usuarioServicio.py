@@ -77,7 +77,10 @@ def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None):
     usuario_obj.actualizar(contrasena, edad, genero)
 
     # Guardar los usuarios actualizados
-    usuarios = [usuario_obj.a_dict() if usuario['nombre_usuario'] == nombre_usuario else usuario for usuario in usuarios]
+    usuarios = [usuario_obj.a_dict() if usuario['id_usuario'] == id_usuario else usuario for usuario in usuarios]
+
+    usuarios = [usuario_obj.a_dict() if usuario['id_usuario'] == id_usuario else usuario for usuario in usuarios]
+
     guardar_usuarios(usuarios)
     
     return True
