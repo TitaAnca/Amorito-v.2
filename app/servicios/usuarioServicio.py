@@ -1,5 +1,5 @@
 import json
-from app.models.usuarioModelo import Usuario
+from app.modelos.usuarioModelo import Usuario
 
 # Leer los usuarios desde el archivo JSON
 def obtener_todos_usuarios():
@@ -24,28 +24,28 @@ def validar_genero(genero):
     return True
 
 # Registrar un nuevo usuario
-def registrar_usuario(nombre_usuario, contrasena, edad, genero):
+def registrar_usuario(id_usuario ,nombre_usuario, contrasena, edad, genero):
     if not validar_genero(genero):
         return False  # Género no válido
 
     usuarios = obtener_todos_usuarios()
 
     # Verificar si el usuario ya existe
-    if any(usuario['nombre_usuario'] == nombre_usuario for usuario in usuarios):
+    if any(usuario['nombre_usuario'] == id_usuario for usuario in usuarios):
         return False  # El usuario ya existe
 
     # Crear el nuevo usuario
-    nuevo_usuario = Usuario(nombre_usuario, contrasena, edad, genero)
+    nuevo_usuario = Usuario(id_usuario, nombre_usuario, contrasena, edad, genero)
     usuarios.append(nuevo_usuario.a_dict())
     guardar_usuarios(usuarios)
     return True
 
 # Iniciar sesión (verificar usuario y contraseña)
-def iniciar_sesion(nombre_usuario, contrasena):
+def iniciar_sesion(id_usuario, contrasena):
     usuarios = obtener_todos_usuarios()
 
     # Buscar el usuario
-    usuario = next((usuario for usuario in usuarios if usuario['nombre_usuario'] == nombre_usuario), None)
+    usuario = next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
 
     if usuario and usuario['contrasena'] == contrasena:
         return True

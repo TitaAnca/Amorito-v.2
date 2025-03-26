@@ -31,7 +31,7 @@ def crear_usuario():
     nuevo_usuario = Usuario(
         id_usuario=len(db["usuarios"]) + 1,
         username=datos["username"],
-        password=datos["password"],
+        contrasena=datos["password"],
         edad=datos["edad"],
         genero=datos["genero"],
     )
