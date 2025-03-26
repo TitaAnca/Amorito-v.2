@@ -1,9 +1,6 @@
 from flask import request, jsonify
-<<<<<<< HEAD
-from app.services.autenticarServicio import registrar_usuario, iniciar_sesion
-=======
 from app.servicios.usuarioServicio import registrar_usuario, iniciar_sesion
->>>>>>> 2429fbab6e5fb1c55bf246b4ca18fe6153a02677
+
 
 # Ruta de registro
 def registrar_usuario_controlador():
