@@ -39,7 +39,7 @@ def registrar_usuario(id_usuario ,nombre_usuario, contrasena, edad, genero):
     usuarios = obtener_todos_usuarios()
 
     # Verificar si el usuario ya existe
-    if any(usuario['nombre_usuario'] == id_usuario for usuario in usuarios):
+    if any(usuario['id_usuario'] == id_usuario for usuario in usuarios):
         return False  # El usuario ya existe
 
     # Crear el nuevo usuario
