@@ -1,22 +1,32 @@
-from modelos.mensajeModelo import Mensaje
+from flask import request, jsonify
+from app.services.messageService import ServicioMensaje
+from datetime import datetime
 
-class MensajeControl:
-    @staticmethod
-    def enviar_mensaje(remitente, destinatario, contenido):
-        """Envía un mensaje entre dos usuarios."""
-        nuevo_mensaje = Mensaje(remitente, destinatario, contenido)
-        nuevo_mensaje.guardar()
-        return {"mensaje": "Mensaje enviado con éxito", "timestamp": nuevo_mensaje.timestamp}
+servicio_mensaje = ServicioMensaje()
 
-    @staticmethod
-    def obtener_conversacion(id_usuario1, id_usuario2):
-        """Obtiene todos los mensajes entre dos usuarios."""
-        mensajes = Mensaje.obtener_conversacion(id_usuario1, id_usuario2)
-        return mensajes if mensajes else {"mensaje": "No hay mensajes entre estos usuarios"}
+def enviar_mensaje():
+    datos = request.get_json()
 
-    @staticmethod
-    def eliminar_mensaje(index):
-        """Elimina un mensaje por su índice en la base de datos."""
-        if Mensaje.eliminar_mensaje(index):
-            return {"mensaje": "Mensaje eliminado con éxito"}
-        return {"mensaje": "Mensaje no encontrado"}, 404
+    id_emisor = datos.get('id_emisor')
+    id_receptor = datos.get('id_receptor')
+    contenido = datos.get('contenido')
+
+    if not id_emisor or not id_receptor or not contenido:
+        return jsonify({"error": "Faltan campos requeridos"}), 400
+
+    timestamp = datetime.now().isoformat()
+    mensaje = servicio_mensaje.crear_mensaje(id_emisor, id_receptor, contenido, timestamp)
+    
+    if mensaje:
+        return jsonify(mensaje.a_dict()), 201
+    return jsonify({"error": "No se pudo crear el mensaje"}), 500
+
+def obtener_mensajes():
+    id_emisor = request.args.get('id_emisor')
+    id_receptor = request.args.get('id_receptor')
+
+    if not id_emisor or not id_receptor:
+        return jsonify({"error": "Faltan campos requeridos"}), 400
+
+    mensajes = servicio_mensaje.obtener_mensajes(id_emisor, id_receptor)
+    return jsonify([mensaje.a_dict() for mensaje in mensajes]), 200
