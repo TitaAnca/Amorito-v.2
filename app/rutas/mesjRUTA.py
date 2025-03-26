@@ -1,5 +1,5 @@
 from flask import Blueprint
-from app.controllers.messageController import enviar_mensaje, obtener_mensajes
+from app.controllers.mensajeControl import enviar_mensaje, obtener_mensajes
 
 ruta_mensajes = Blueprint('mensajes', __name__)
 
