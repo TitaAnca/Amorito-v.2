@@ -1,0 +1,44 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    .gradient{
+        height: 600px;
+        background: linear-gradient( to  #85b84a80, #f0f4ef, #a0c6d1);
+    }
+}
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.container-details{
+    width: 93%;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    
+}
+input[type="text"], input[type="email"], input[type="tel"], input[type="number"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+}
+button {
+    display: block;
+    width: 100%;
+    padding: 10px 0;
+    background-color: #3F403F;
+    color: white;
+    border: none;
+    border-radius: 20px;   /*border radius es la curvatura de los bordes*/
+    cursor: pointer;
+    font-size: 16px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+button:hover {
+    background-color: #45a049;
+}
