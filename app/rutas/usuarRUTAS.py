@@ -5,7 +5,7 @@ from app.controllers.usuarioControl import (
     eliminar_usuario_controlador
 )
 
-usuario_bp = Blueprint('usuario_bp', __name__)
+usuario_bp = Blueprint('usuario_bp', __name__, url_prefix='/usuario')
 
 # Rutas de gestión de usuarios
 usuario_bp.route('/actualizar', methods=['PUT'])(actualizar_usuario_controlador)  # Actualizar datos de usuario
