@@ -1,44 +1,52 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-    .gradient{
-        height: 600px;
-        background: linear-gradient( to  #85b84a80, #f0f4ef, #a0c6d1);
-    }
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
 }
-.container {
-    max-width: 600px;
-    margin: auto;
-    padding: 30px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+form {
+    width: 50%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.container-details{
-    width: 93%;
+
+form div {
+    margin-bottom: 10px;
 }
+
 label {
     display: block;
-    margin-bottom: 8px;
-    
+    margin-bottom: 5px;
 }
-input[type="text"], input[type="email"], input[type="tel"], input[type="number"] {
+
+input, select {
     width: 100%;
     padding: 8px;
-    margin-bottom: 16px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
 }
+
 button {
-    display: block;
     width: 100%;
-    padding: 10px 0;
-    background-color: #3F403F;
+    padding: 10px;
+    background-color: #007BFF;
     color: white;
     border: none;
-    border-radius: 20px;   /*border radius es la curvatura de los bordes*/
+    border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
 button:hover {
-    background-color: #45a049;
+    background-color: #0056b3;
 }

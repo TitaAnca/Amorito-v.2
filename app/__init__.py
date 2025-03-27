@@ -1,21 +1,28 @@
-from flask import Flask
+from flask import Flask, render_template
 from app.rutas.usuarRUTAS import usuario_bp
 from app.rutas.mesjRUTA import mensaje_bp
 from app.rutas.matchRUTA import match_bp
 from app.rutas.autenRUTA import autent_bp
-from app.config import DevelopmentConfig  # Aquí importas la configuración
+from app.config import DevelopmentConfig
 
 def create_app():
     # Crear la instancia de la aplicación Flask
-    app = Flask(__name__)
+    app = Flask(__name__,
+                static_folder="../public",  # Archivos estáticos (CSS, JS)
+                template_folder="../public/html")  # Plantillas HTML
 
-    # Configuración de la aplicación (puedes cargar distintas configuraciones)
-    app.config.from_object(DevelopmentConfig)  # Aquí cargamos la configuración del entorno
+    # Configuración de la aplicación (Cargar configuración del entorno)
+    @app.route('/')
+    def index():
+        return render_template('test.html')  # Cambiado a test.html para probar
 
-    # Registrar las rutas
+    # Registrar los blueprints
     app.register_blueprint(usuario_bp)
     app.register_blueprint(mensaje_bp)
     app.register_blueprint(match_bp)
     app.register_blueprint(autent_bp)
 
+    # Ruta principal que devuelve la página de registro
+
     return app
+
