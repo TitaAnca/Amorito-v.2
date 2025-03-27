@@ -24,17 +24,20 @@ def validar_genero(genero):
     return True
 
 def validar_edad(edad):
-    if edad<18 and edad>90:
+    if edad < 18 or edad > 90:
+        return False
+    return True
+
+# Validar la orientación sexual
+def validar_orientacion(orientacion):
+    if orientacion not in ["heterosexual", "bisexual", "homosexual", "pansexual"]:
         return False
     return True
 
 # Registrar un nuevo usuario
-def registrar_usuario(id_usuario ,nombre_usuario, contrasena, edad, genero):
-    if not validar_genero(genero):
-        return False  # Género no válido
-
-    if not validar_edad(edad):
-        return False #Edad no válida
+def registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual):
+    if not validar_genero(genero) or not validar_edad(edad) or not validar_orientacion(orientacion_sexual):
+        return False  # Datos no válidos
 
     usuarios = obtener_todos_usuarios()
 
@@ -43,7 +46,7 @@ def registrar_usuario(id_usuario ,nombre_usuario, contrasena, edad, genero):
         return False  # El usuario ya existe
 
     # Crear el nuevo usuario
-    nuevo_usuario = Usuario(id_usuario, nombre_usuario, contrasena, edad, genero)
+    nuevo_usuario = Usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual)
     usuarios.append(nuevo_usuario.a_dict())
     guardar_usuarios(usuarios)
     return True
@@ -64,7 +67,7 @@ def obtener_usuario_por_nombre(id_usuario):
     usuario = next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
     return usuario
 
-def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None):
+def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None, orientacion_sexual=None):
     usuarios = obtener_todos_usuarios()
 
     # Buscar el usuario
@@ -74,18 +77,16 @@ def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None):
         return False  # Usuario no encontrado
 
     usuario_obj = Usuario(**usuario)
-    usuario_obj.actualizar(contrasena, edad, genero)
+    usuario_obj.actualizar(contrasena, edad, genero, orientacion_sexual)
 
     # Guardar los usuarios actualizados
-    usuarios = [usuario_obj.a_dict() if usuario['id_usuario'] == id_usuario else usuario for usuario in usuarios]
-
     usuarios = [usuario_obj.a_dict() if usuario['id_usuario'] == id_usuario else usuario for usuario in usuarios]
 
     guardar_usuarios(usuarios)
     
     return True
 
-    # Eliminar un usuario por nombre de usuario
+# Eliminar un usuario por ID
 def eliminar_usuario(id_usuario):
     usuarios = obtener_todos_usuarios()
 
