@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - CUPIDO </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_AUTH_DOMAIN",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_STORAGE_BUCKET",
+            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+        
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        
+        function register(event) {
+            event.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(() => alert("Registro exitoso!"))
+                .catch(error => alert(error.message));
+        }
+        
+        function registerWithGoogle() {
+            const provider = new firebase.auth.GoogleAuthProvider();
+            auth.signInWithPopup(provider)
+                .then(() => alert("Registro con Google exitoso!"))
+                .catch(error => alert(error.message));
+        }
+    </script>
+</head>
+<body class="flex justify-center items-center h-screen bg-gray-100">
+    <div class="w-96 p-6 shadow-lg bg-white rounded-lg">
+        <h2 class="text-2xl font-bold mb-4">Registro</h2>
+        <form onsubmit="register(event)">
+            <input type="email" id="email" placeholder="Correo electrónico" class="w-full p-2 mb-2 border rounded" required>
+            <input type="password" id="password" placeholder="Contraseña" class="w-full p-2 mb-4 border rounded" required>
+            <button type="submit" class="w-full bg-blue-500 text-white p-2 rounded mb-2">Registrarse</button>
+        </form>
+        <button onclick="registerWithGoogle()" class="w-full bg-red-500 text-white p-2 rounded">Registrarse con Google</button>
+    </div>
+</body>
+</html>
