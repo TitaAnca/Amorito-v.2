@@ -14,7 +14,7 @@ def create_app():
     # Configuración de la aplicación (Cargar configuración del entorno)
     @app.route('/')
     def index():
-        return render_template('test.html')  # Cambiado a test.html para probar
+        return render_template('Registro.html')  # Cambiado a test.html para probar
 
     # Registrar los blueprints
     app.register_blueprint(usuario_bp)
