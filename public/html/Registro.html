@@ -16,50 +16,31 @@
                         <label for="nombre">Name:</label>
                         <input type="text" id="nombre" name="nombre" placeholder="First and last name">
 
-                        <label for="apellido">Email:</label>
-                        <input type="text" id="apellido" name="apellido" placeholder="example@domain.com">
-
-                        <label for="email">Phone:</label>
-                        <input type="email" id="email" name="email" placeholder="Eg. +447500000000000">
-                    </div>
-
-                    <h3>Step 2: Delivery Adress</h3>
-                    <div class="container-adress">
-                        <label for="direccion">Adress:</label>
-                        <input type="text" id="direccion" name="direccion">
-
-                        <label for="ciudad">Post Code:</label>
-                        <input type="text" id="ciudad" name="ciudad">
-
-                        <label for="codigo_postal">Country:</label>
-                        <input type="text" id="codigo_postal" name="codigo_postal">
-                    </div>
-
-                    <h3><strong></strong>Step 3: Card details</strong></h3>
-                    <div class="container-card">
-                        <label>Card type:</label><div class="container-buttons">
-                            <input type="radio" id="visa" name="tipo_tarjeta" value="Visa">
-                            <label for="visa">Visa</label>
-                            <input type="radio" id="amex" name="tipo_tarjeta" value="Amex">
-                            <label for="amex">American Express</label>
-                            <input type="radio" id="mastercard" name="tipo_tarjeta" value="MasterCard">
-                            <label for="mastercard">MasterCard</label>
-                        </div>
-                        
-                        <label for="tarjeta">Card Number:</label>
-                        <input type="text" id="tarjeta" name="tarjeta">
-                        <label for="expiracion">Security code:</label>
-                        <input type="text" id="expiracion" name="expiracion">
-                        <label for="cvv">Name on card:</label>
-                        <input type="text" id="cvv" name="cvv" placeholder="Exact name as on the card">
-                    </div>
-                    <div class="container-enviar">
-                            <button type="submit">Enviar</button>
-                    </div>      
-                
-                    
-                </form>
-        </div>    
+    <div class="registro-container">
+        <h1>REGISTRO</h1>
+        <form id="registroForm">
+            <h2><strong>1: Inicio sesión</strong></h2>
+            <div class="form-group">
+                <label for="nombre_usuario">Nombre de usuario</label>
+                <input type="text" id="nombre_usuario" name="nombre_usuario" required>
+            </div>
+            <div class="form-group">
+                <label for="contrasena">Contraseña</label>
+                <input type="password" id="contrasena" name="contrasena" required>
+            </div>
+            <div class="form-group">
+                <label for="biografia">Biografía</label>
+                <textarea id="biografia" name="biografia" rows="4"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="edad">Edad</label>
+                <input type="number" id="edad" name="edad" min="18" max="80" required>
+            </div>
+            <button type="submit">Registrarse</button>
+            <h3>2: Datos Personales</h3>
+            <h4>3: </h4>
+        </form>
+        <p>¿Ya tienes cuenta? <a href="login.html">Iniciar sesión</a></p>
     </div>
     
 </body>
