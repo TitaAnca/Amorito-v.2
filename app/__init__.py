@@ -8,8 +8,8 @@ from app.config import DevelopmentConfig
 def create_app():
     # Crear la instancia de la aplicación Flask
     app = Flask(__name__,
-                static_folder="../public",  # Archivos estáticos (CSS, JS)
-                template_folder="../public/html")  # Plantillas HTML
+                static_folder="../static",  # Archivos estáticos (CSS, JS)
+                template_folder="../templates")  # Plantillas HTML
 
     # Configuración de la aplicación (Cargar configuración del entorno)
     @app.route('/')
