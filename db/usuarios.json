@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "id_usuario": "carlitos123",
+        "nombre_usuario": "Carlos",
+        "contrasena": "1234",
+        "edad": 19,
+        "genero": "masculino",
+        "orientacion_sexual": "heterosexual"
+    }
+]
