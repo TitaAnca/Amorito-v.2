@@ -6,5 +6,13 @@
         "edad": 19,
         "genero": "masculino",
         "orientacion_sexual": "heterosexual"
+    },
+    {
+        "id_usuario": "MBA",
+        "nombre_usuario": "Manal",
+        "contrasena": "12345",
+        "edad": 19,
+        "genero": "femenino",
+        "orientacion_sexual": "heterosexual"
     }
 ]
