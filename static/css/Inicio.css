@@ -1,5 +1,5 @@
 body {
-    background-image:url(Imagenes\ Cupido\ API.jpg);
+    background-image:url(../Imagenes/Fondo\ Cupido\ API.jpg);
     background-size: cover;
     color: #8a1515ef;
     text-align: center;
@@ -107,7 +107,7 @@ body {
 }
 #start-screen {
     /*background: linear-gradient(135deg, #faf4e9, #f7edd7);*/
-    background-image: url(FONO\ BASE.jpg);
+    background-image: url(../Imagenes/Fondo_Base.jpg);
     padding: 80px;
     border-radius: 20px;
     box-shadow:  15px 15px 10px #0e1a3a85,  
