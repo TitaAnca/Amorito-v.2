@@ -16,6 +16,9 @@ def create_app():
     def index():
         return render_template('Inicio.html')  # Cambiado a test.html para probar
 
+    @app.route('/registro')
+    def registrarse():
+        return render_template('Registro.html')
     # Registrar los blueprints
     app.register_blueprint(usuario_bp)
     app.register_blueprint(mensaje_bp)
