@@ -1,9 +1,10 @@
 body {
-    font-family: Arial, sans-serif;
-    padding: 0;
+    font-family:Georgia, 'Times New Roman', Times, serif;
     color: #333;
     font-weight: bold;
 
+    background-image: url(../Imagenes/Fondo\ Cupido\ API.jpg);
+    background-size:cover;
     max-width: 600px;
     margin: auto;
     padding: 20px;
@@ -19,12 +20,14 @@ h1 {
 }
 
 form {
-    width: 50%;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+    max-width: 600px;
+    margin: 25px;
+    background-color: rgb(233, 231, 221);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(41, 13, 34, 0.795);
+
 }
 
 form div {
@@ -47,7 +50,7 @@ input, select {
 button {
     width: 100%;
     padding: 10px;
-    background-color: #007BFF;
+    background-color: #4f720f;
     color: white;
     border: none;
     border-radius: 4px;
@@ -55,5 +58,6 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #ca6303;
+    color: #46330c;
 }
