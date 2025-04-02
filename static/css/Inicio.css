@@ -1,0 +1,157 @@
+body {
+    background-image:url(Fondo\ Cupido\ API.jpg);
+    background-size: cover;
+    color: #8a1515ef;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-shadow:  1px 1px 1px #500924ea,  
+        1px -1px 0 #5009247e,
+        -1px 1px 0 #5009247e,
+        1px 1px 0 #5009247e;
+
+}
+
+.dm-serif-display-regular {
+    font-family: "DM Serif Display", serif;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.bienvenidos {
+    font-size: 0.5em;
+}
+.custom-title {
+    user-select: none;
+    margin-top: 10px;
+    margin-bottom: auto;
+    color:#e78b3f;
+    font-size: 80px;
+    text-shadow:  5px 7px 3px #5009247e,  
+        1px -1px 0 #19360b,
+        -1px 1px 0 #19360b,
+        1px 1px 0 #19360b;
+}
+.container {
+    width: 95%;
+    max-width: 600px;
+    text-align: center;
+}
+.question {
+    border-radius: 25px; /* Rounded corners */
+    padding: 20px 30px;
+    font-size: 40px;
+    background-color: #c28a37;
+    color: antiquewhite;
+    user-select: none;
+    box-shadow:  5px 5px 0 #8a5d32,  
+        5px -5px 0 #8a5d32,
+        -5px 5px 0 #8a5d32,
+        5px 5px 0 #8a5d32;
+}
+.options {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 40px;
+    flex-wrap: flex;
+}
+.option {
+    background: rgb(255, 245, 227);
+    box-shadow:  5px 5px 0 #8a5d32,  
+        5px -5px 0 #8a5d32,
+        -5px 5px 0 #8a5d32,
+        5px 5px 0 #8a5d32;
+    padding: 2px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 5px;
+    height: 360px;
+}
+.option img {
+    width: 250px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 25px;
+    margin: 5px;
+    margin-bottom: 5px;
+    padding: 10px;
+}
+.option:hover {
+    background: rgba(132, 167, 86, 0.849);
+    box-shadow:  5px 7px 3px #21490cad,  
+        1px -1px 0 #19360b,
+        -1px 1px 0 #19360b,
+        1px 1px 0 #19360b;
+    color: antiquewhite;
+    transform: translateY(-5px) scale(1.1);
+}
+.hidden {
+    display: none;
+}
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+#start-screen {
+    /*background: linear-gradient(135deg, #faf4e9, #f7edd7);*/
+    background-image: url(FONO\ BASE.jpg);
+    padding: 80px;
+    border-radius: 20px;
+    box-shadow:  15px 15px 10px #0e1a3a85,  
+        5px -5px 0 #365025,
+        -5px 5px 0 #365025,
+        5px 5px 0 #365025;
+}
+#start-screen h1 {
+    font-size: 30px;
+    color: #e78b3f;
+    margin-bottom: auto;
+    text-shadow:  8px 8px 3px #5009247e,  
+    1px -1px 0 #19360b,
+    -1px 1px 0 #19360b,
+    1px 1px 0 #19360b;
+}
+#start-screen p {
+    font-size: 25px;
+}
+button {
+    font-size: 30px;
+    padding: 15px 30px;
+    border: none;
+    cursor: pointer;
+    background: rgb(70, 92, 28);
+    color: #ffffff;
+    border-radius: 15px;
+    font-family: 'Fira Code';
+    transition: all 0.3s ease-in-out;
+    margin-top: 20px;
+
+}
+button:hover {
+    background-color: #e78b3f;
+    color: #8a1515ef;
+    box-shadow:  5px 8px 5px #472d0a94,  
+        1px -1px 0 #ad8632,
+        -1px 1px 0 #ad8632,
+        1px 1px 0 #ad8632;
+        transform: translateY(-5px) scale(1.1);
+}
+.intro-container {
+    font-size: 10px;
+}
+#intro-container p {
+    font-size: 20px
+}

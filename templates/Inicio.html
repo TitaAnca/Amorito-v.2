@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trivial Retro</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Inicio.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+</head>
+<body class="dm-serif-display-regular">
+    <div id="start-screen" class="container">
+        <h1 class="bienvenidos"><bold>BIENVENID@S A</bold></h1>
+        <h2 class="custom-title"><strong>༻𝐂𝐔𝐏𝐈𝐃♡༺</strong></h2>
+        <p><bold>¡La nueva y más exitosa web de citas que dejaras de usar en breve!</bold></p>
+        <div id="intro-container" class="container">
+            <p>¿Ya tiene una cuenta? Si no es el caso,¡hora de crearse una!</p>
+            <button onclick="window.location.href='registro.html'">Registrarse</button>
+            <button onclick="window.location.href='iniciar_sesion.html'">Iniciar Sesión</button>
+        </div>
+    </div>
+
+    <div id="game-screen" class="container hidden">
+        <h1 class="question" id="question"></h1>
+        <div class="options" id="options"></div>
+        <button onclick="previousQuestion()" id="back-button" class="hidden">Back</button>
+    </div>
+    
+    <script>
+        function startGame() {
+            document.getElementById("start-screen").classList.add("hidden");
+            document.getElementById("game-screen").classList.remove("hidden");
+            loadQuestion();
+        }
+        
+        function loadQuestion() {
+            const questionContainer = document.getElementById("question");
+            const optionsContainer = document.getElementById("options");
+            const backButton = document.getElementById("back-button");
+            
+            questionContainer.textContent = questions[currentQuestionIndex].question;
+            optionsContainer.innerHTML = "";
+            
+            questions[currentQuestionIndex].answers.forEach(answer => {
+                const optionElement = document.createElement("div");
+                optionElement.classList.add("option");
+                optionElement.onclick = () => selectAnswer(optionElement);
+                
+                const imgElement = document.createElement("img");
+                imgElement.src = answer.img;
+                imgElement.alt = answer.text;
+                
+                const textElement = document.createElement("span");
+                textElement.textContent = answer.text;
+                
+                optionElement.appendChild(imgElement);
+                optionElement.appendChild(textElement);
+                optionsContainer.appendChild(optionElement);
+            });
+
+            backButton.classList.toggle("hidden", currentQuestionIndex === 0);
+        }
+        
+        function selectAnswer() {
+            setTimeout(() => nextQuestion(), 500);
+        }
+        
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                loadQuestion();
+            } else {
+                document.getElementById("question").textContent = "Your answers have been submitted! Thank you for replying!";
+                document.getElementById("options").innerHTML = "";
+                document.getElementById("back-button").classList.add("hidden");
+            }
+        }
+        
+        function previousQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                loadQuestion();
+            }
+        }
+    </script>
+</body>
+</html>
