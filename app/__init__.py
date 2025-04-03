@@ -21,8 +21,12 @@ def create_app():
         return render_template('Registro.html')
     
     @app.route('/inicio_sesion')
-    def iniciar_sesion():
+    def iniciarSesion():
         return render_template('Inicio_sesion.html')
+
+    @app.route('/Matches')
+    def iniciar_sesion():
+        return render_template('Matches.html')
 
     # Registrar los blueprints
     app.register_blueprint(usuario_bp)
@@ -35,4 +39,3 @@ def create_app():
     # Ruta principal que devuelve la página de registro
 
     return app
-
