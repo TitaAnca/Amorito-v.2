@@ -3,10 +3,22 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
+
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    color: #293507;
+    font-weight: bold;
+
+    background-image: url(../Imagenes/Fondo\ Cupido\ API.jpg);
+    background-size:cover;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(126, 7, 7, 0.1);
+    background-color: rgb(241, 238, 220);
+
 }
+
 .card {
     display: flex;
     flex-direction: column;
