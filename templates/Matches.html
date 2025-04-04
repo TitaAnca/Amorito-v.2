@@ -4,65 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Match</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            font-family: Arial, sans-serif;
-        }
-        .card {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            height: 650px;
-            width: 450px;
-            padding: 30px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            text-align: center;
-        }
-        .card img {
-            margin-top: 30px;
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-        .card h2 {
-            margin: 15px 0 5px;
-            font-size: 24px;
-        }
-        .card p {
-            margin: 0 0 20px;
-            color: #555;
-        }
-        .buttons {
-            display: flex;
-            justify-content: center;
-        }
-        .buttons button {
-            padding: 10px 50px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 20px;
-        }
-        .match {
-            background-color: #4caf50;
-            color: white;
-        }
-        .reject {
-            background-color: #f44336;
-            color: white;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/Matches.css') }}">
 </head>
 <body>
     <div class="card" id="profile-card">
@@ -77,54 +19,6 @@
         </div>
         
     </div>
-
-    <script>
-        // Simulación de datos obtenidos de una base de datos
-        const profiles = [
-            {
-                name: "Juan Pérez",
-                age: 28,
-                bio: "Me encanta la música y los deportes.",
-                photo: "https://via.placeholder.com/100?text=Juan"
-            },
-            {
-                name: "María Gómez",
-                age: 32,
-                bio: "Amante de los libros y las caminatas al aire libre.",
-                photo: "https://via.placeholder.com/100?text=Maria"
-            }
-        ];
-        
-        let currentProfileIndex = 0;
-
-        // Función para mostrar el siguiente perfil
-        const loadProfile = () => {
-            if (currentProfileIndex < profiles.length) {
-                const profile = profiles[currentProfileIndex];
-                document.getElementById("name").textContent = profile.name;
-                document.getElementById("age").textContent = `Edad: ${profile.age}`;
-                document.getElementById("bio").textContent = `Bio: ${profile.bio}`;
-                document.querySelector(".card img").src = profile.photo;
-            } else {
-                document.getElementById("profile-card").innerHTML = "<p>No hay más perfiles disponibles.</p>";
-            }
-        };
-
-        // Funciones para manejar los botones
-        const handleMatch = () => {
-            alert("¡Has hecho un match con este perfil!");
-            currentProfileIndex++;
-            loadProfile();
-        };
-
-        const handleReject = () => {
-            alert("Has rechazado este perfil.");
-            currentProfileIndex++;
-            loadProfile();
-        };
-
-        // Cargar el primer perfil al inicio
-        loadProfile();
-    </script>
+    <script src="{{ url_for('static', filename='js/Matches.js') }}"></script>
 </body>
 </html>
