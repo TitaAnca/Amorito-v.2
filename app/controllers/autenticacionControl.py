@@ -1,4 +1,6 @@
 from flask import request, jsonify
+from werkzeug.utils import secure_filename
+import _osx_support
 from app.servicios.usuarioServicio import registrar_usuario, iniciar_sesion
 
 # Ruta de registro
@@ -23,6 +25,7 @@ def registrar_usuario_controlador():
     if orientacion_sexual not in ["heterosexual", "bisexual", "homosexual", "pansexual"]:
         return jsonify({"mensaje": "La orientación sexual no es válida"}), 400
 
+    foto = request.files.get("foto_perfil")  # Aquí obtenemos el archivo de la foto de perfil
     # Registrar al usuario
     if registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual):
         return jsonify({"mensaje": "Usuario registrado correctamente"}), 201

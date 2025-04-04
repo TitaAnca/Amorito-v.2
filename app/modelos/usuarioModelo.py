@@ -1,7 +1,7 @@
 class Usuario:
     ORIENTACIONES_VALIDAS = {"heterosexual", "bisexual", "homosexual", "pansexual"}
 
-    def __init__(self, id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual):
+    def __init__(self, id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual, foto_perfil=None):
         if orientacion_sexual not in self.ORIENTACIONES_VALIDAS:
             raise ValueError("Orientación sexual no válida")
         
@@ -11,6 +11,7 @@ class Usuario:
         self.edad = edad
         self.genero = genero
         self.orientacion_sexual = orientacion_sexual
+        self.foto_perfil = foto_perfil  # Nuevo campo para la foto de perfil
     
     def a_dict(self):
         return {
@@ -19,10 +20,11 @@ class Usuario:
             "contrasena": self.contrasena,
             "edad": self.edad,
             "genero": self.genero,
-            "orientacion_sexual": self.orientacion_sexual
+            "orientacion_sexual": self.orientacion_sexual,
+            "foto_perfil": self.foto_perfil  # Incluir la foto de perfil en el diccionario
         }
-    
-    def actualizar(self, contrasena=None, edad=None, genero=None, orientacion_sexual=None):
+
+    def actualizar(self, contrasena=None, edad=None, genero=None, orientacion_sexual=None, foto_perfil=None):
         if contrasena:
             self.contrasena = contrasena
         if edad:
@@ -33,6 +35,9 @@ class Usuario:
             if orientacion_sexual not in self.ORIENTACIONES_VALIDAS:
                 raise ValueError("Orientación sexual no válida")
             self.orientacion_sexual = orientacion_sexual
+        if foto_perfil:
+            self.foto_perfil = foto_perfil  # Actualizar la foto de perfil
+
     
     def es_match(self, otro_usuario):
         if not isinstance(otro_usuario, Usuario):

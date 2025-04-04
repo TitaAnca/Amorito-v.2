@@ -1,4 +1,6 @@
+import os
 from flask import request, jsonify
+from werkzeug.utils import secure_filename
 from app.servicios.usuarioServicio import (
     obtener_usuario_por_nombre, 
     eliminar_usuario, 
@@ -14,11 +16,13 @@ def actualizar_usuario_controlador():
     genero = datos.get("genero")
     orientacion_sexual = datos.get("orientacion_sexual")
 
+    foto = request.files.get("foto_perfil")
+    
     # Verificar si el ID de usuario está presente
     if not id_usuario:
         return jsonify({"mensaje": "El ID de usuario es obligatorio"}), 400
 
-    if actualizar_usuario(id_usuario, contrasena, edad, genero, orientacion_sexual):
+    if actualizar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual):
         return jsonify({"mensaje": "Datos del usuario actualizados correctamente"}), 200
     else:
         return jsonify({"mensaje": "Usuario no encontrado"}), 404

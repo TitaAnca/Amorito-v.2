@@ -1,5 +1,10 @@
+import os
 import json
+from werkzeug.utils import secure_filename
 from app.modelos.usuarioModelo import Usuario
+
+# Configuración de la ruta para guardar fotos
+UPLOAD_FOLDER = 'static/Imagenes/perfiles'
 
 # Leer los usuarios desde el archivo JSON
 def obtener_todos_usuarios():
@@ -34,8 +39,16 @@ def validar_orientacion(orientacion):
         return False
     return True
 
+def guardar_foto_perfil(foto, id_usuario):
+    if foto:
+        filename = secure_filename(foto.filename)  # Asegurarse de que el nombre del archivo sea seguro
+        foto_path = os.path.join(UPLOAD_FOLDER, f"{id_usuario}_{filename}")
+        foto.save(foto_path)  # Guardamos la foto en el directorio correspondiente
+        return foto_path  # Devolvemos la ruta de la foto guardada
+    return None  # Si no hay foto, retornamos None
+
 # Registrar un nuevo usuario
-def registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual):
+def registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual, foto=None):
     if not validar_genero(genero) or not validar_edad(edad) or not validar_orientacion(orientacion_sexual):
         return False  # Datos no válidos
 
@@ -44,6 +57,10 @@ def registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orie
     # Verificar si el usuario ya existe
     if any(usuario['id_usuario'] == id_usuario for usuario in usuarios):
         return False  # El usuario ya existe
+
+    foto_perfil = None
+    if foto:
+        foto_perfil = guardar_foto_perfil(foto, id_usuario)
 
     # Crear el nuevo usuario
     nuevo_usuario = Usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual)
@@ -67,7 +84,7 @@ def obtener_usuario_por_nombre(id_usuario):
     usuario = next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
     return usuario
 
-def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None, orientacion_sexual=None):
+def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None, orientacion_sexual=None, foto=None):
     usuarios = obtener_todos_usuarios()
 
     # Buscar el usuario
@@ -79,6 +96,10 @@ def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None, orie
     usuario_obj = Usuario(**usuario)
     usuario_obj.actualizar(contrasena, edad, genero, orientacion_sexual)
 
+    if foto:
+        foto_perfil = guardar_foto_perfil(foto, id_usuario)
+        usuario_obj.actualizar(foto_perfil=foto_perfil)
+        
     # Guardar los usuarios actualizados
     usuarios = [usuario_obj.a_dict() if usuario['id_usuario'] == id_usuario else usuario for usuario in usuarios]
 
