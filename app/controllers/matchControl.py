@@ -1,4 +1,4 @@
-from app.servicios.matchServicio import crear_match
+from app.servicios.matchServicio import crear_match, obtener_usuarios_compatibles
 from flask import jsonify, request
 
 def crear_match_controlador():
@@ -10,10 +10,23 @@ def crear_match_controlador():
 
     if id_usuario1 == id_usuario2:
         return jsonify({"error": "Un usuario no puede hacer match consigo mismo"}), 400
-    
+
     match = crear_match(id_usuario1, id_usuario2)
 
     if match:
-        return jsonify({"mensaje": "Match creada exitosamente", "match": match.to_dict()}), 201
+        if match.estado == "aceptado":
+            return jsonify({
+                "mensaje": "¡Es un match!",
+                "match": match.to_dict()
+            }), 201
+        else:
+            return jsonify({
+                "mensaje": "Aún no ha habido respuesta del otro usuario",
+                "match": match.to_dict()
+            }), 200
     else:
-        return jsonify({"error": "No se encontró un match (verifica edad, preferencias y compatibilidad de género)"}), 400
+        return jsonify({"error": "Error al intentar hacer match"}), 400
+
+def obtener_compatibles_controlador(id_usuario):
+    compatibles = obtener_usuarios_compatibles(id_usuario)
+    return jsonify(compatibles)

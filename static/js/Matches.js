@@ -1,46 +1,55 @@
-// Simulación de datos obtenidos de una base de datos
-const profiles = [
-    {
-        name: "Juan Pérez",
-        age: 28,
-        bio: "Me encanta la música y los deportes.",
-        photo: "https://via.placeholder.com/100?text=Juan"
-    },
-    {
-        name: "María Gómez",
-        age: 32,
-        bio: "Amante de los libros y las caminatas al aire libre.",
-        photo: "https://via.placeholder.com/100?text=Maria"
-    }
-];
+let perfiles = [];
+let indiceActual = 0;
+let idUsuario = document.body.getAttribute("data-id");
 
-let currentProfileIndex = 0;
-
-// Función para mostrar el siguiente perfil
-const loadProfile = () => {
-    if (currentProfileIndex < profiles.length) {
-        const profile = profiles[currentProfileIndex];
-        document.getElementById("name").textContent = profile.name;
-        document.getElementById("age").textContent = `Edad: ${profile.age}`;
-        document.getElementById("bio").textContent = `Bio: ${profile.bio}`;
-        document.querySelector(".card img").src = profile.photo;
-    } else { 
-        document.getElementById("profile-card").innerHTML = "<p>No hay más perfiles disponibles.</p>";
+const cargarPerfiles = async () => {
+    try {
+        const res = await fetch(`/match/compatibles/${idUsuario}`);
+        perfiles = await res.json();
+        indiceActual = 0;
+        mostrarPerfil();
+    } catch (error) {
+        console.error("Error cargando perfiles compatibles:", error);
     }
 };
 
-// Funciones para manejar los botones
-const handleMatch = () => {
-    alert("¡Has hecho un match con este perfil!");
-    currentProfileIndex++;
-    loadProfile();
+const mostrarPerfil = () => {
+    if (indiceActual < perfiles.length) {
+        const perfil = perfiles[indiceActual];
+        document.getElementById("name").textContent = perfil.nombre;
+        document.getElementById("age").textContent = `Edad: ${perfil.edad}`;
+        document.getElementById("bio").textContent = perfil.bio;
+        document.querySelector(".card img").src = perfil.foto_perfil;
+    } else {
+        document.getElementById("profile-card").innerHTML = "<p>No hay más perfiles compatibles disponibles.</p>";
+    }
 };
 
-const handleReject = () => {
-    alert("Has rechazado este perfil.");
-    currentProfileIndex++;
-    loadProfile();
+const handleMatch = async () => {
+    const perfil = perfiles[indiceActual];
+    try {
+        const res = await fetch('/match/crear_match', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id_usuario1: idUsuario,
+                id_usuario2: perfil.id_usuario
+            })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            alert(data.mensaje);
+        } else {
+            alert(data.error || "No se pudo hacer match.");
+        }
+    } catch (error) {
+        alert("Error en el servidor.");
+    }
+
+    indiceActual++;
+    mostrarPerfil();
 };
 
-// Cargar el primer perfil al inicio
-loadProfile();
+document.addEventListener("DOMContentLoaded", cargarPerfiles);
