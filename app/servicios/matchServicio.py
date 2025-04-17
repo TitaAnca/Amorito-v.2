@@ -135,7 +135,7 @@ def rechazar_match(id_usuario1, id_usuario2):
     matches = []
     if os.path.exists(matches_path):
         with open(matches_path, 'r') as f:
-            matches = [json.loads(line) for line in f if line.strip()]
+            matches = json.load(f)
 
     # Buscar si ya existe un match inverso
     for match in matches:
@@ -153,7 +153,7 @@ def rechazar_match(id_usuario1, id_usuario2):
     datos_match = {
         'edad_usuario1': usuario1['edad'],
         'edad_usuario2': usuario2['edad'],
-        'preferencia_usuario1': usuario1['orentacion_sexual'],
+        'preferencia_usuario1': usuario1['orientacion_sexual'],
         'preferencia_usuario2': usuario2['orientacion_sexual'],
         'genero_usuario1': usuario1['genero'],
         'genero_usuario2': usuario2['genero'],
