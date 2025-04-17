@@ -5,7 +5,7 @@ def obtener_usuario_por_id(id_usuario):
     # Aquí buscamos el usuario por su ID en la base de datos, en este caso lo hacemos con JSON.
     with open('db/users.json') as f:
         usuarios = json.load(f)
-    return next((usuario for usuario in usuarios if usuario['id'] == id_usuario), None)
+    return next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
 
 def verificar_compatibilidad_edad(usuario1, usuario2):
     # Definimos los rangos de edad
@@ -25,12 +25,27 @@ def verificar_compatibilidad_edad(usuario1, usuario2):
     # Comprobamos si ambos usuarios están en el mismo rango de edad
     return rango_usuario1 == rango_usuario2
 
+def obtener_generos_atraidos(orientacion, genero_propio):
+    if orientacion == "heterosexual":
+        if genero_propio == "hombre":
+            return ["mujer"]
+        elif genero_propio == "mujer":
+            return ["hombre"]
+        elif genero_propio == "no binario":
+            return ["hombre", "mujer"]
+    elif orientacion == "homosexual":
+        return [genero_propio]
+    elif orientacion == "bisexual":
+        return ["hombre", "mujer"]
+    elif orientacion == "pansexual":
+        return ["hombre", "mujer", "no binario"]
+    return []
+
 def verificar_preferencias(usuario1, usuario2):
-    # Comparar preferencias sexuales y géneros
-    if usuario1['preferencia'] == usuario2['preferencia'] or usuario2['preferencia'] == "bisexual" or usuario1['preferencia'] == "bisexual":
-        if usuario1['genero'] == usuario2['genero'] or usuario2['genero'] == "no binario" or usuario1['genero'] == "no binario":
-            return True
-    return False
+    generos_usuario1 = obtener_generos_atraidos(usuario1['orientacion_sexual'], usuario1['genero'])
+    generos_usuario2 = obtener_generos_atraidos(usuario2['orientacion_sexual'], usuario2['genero'])
+
+    return (usuario2['genero'] in generos_usuario1) and (usuario1['genero'] in generos_usuario2)
 
 def crear_match(id_usuario1, id_usuario2):
     # Buscar los usuarios
@@ -64,4 +79,4 @@ def crear_match(id_usuario1, id_usuario2):
         json.dump(nuevo_match.__dict__, f)
         f.write('\n')
 
-    return nueva_match
+    return nuevo_match
