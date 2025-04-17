@@ -3,7 +3,7 @@ import json
 
 def obtener_usuario_por_id(id_usuario):
     # Aquí buscamos el usuario por su ID en la base de datos, en este caso lo hacemos con JSON.
-    with open('db/users.json') as f:
+    with open('db/usuarios.json') as f:
         usuarios = json.load(f)
     return next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
 
@@ -21,24 +21,23 @@ def verificar_compatibilidad_edad(usuario1, usuario2):
     # Determinamos en qué rango de edad está cada uno
     rango_usuario1 = next((r for r in rangos_edad if r[0] <= edad_usuario1 <= r[1]), None)
     rango_usuario2 = next((r for r in rangos_edad if r[0] <= edad_usuario2 <= r[1]), None)
-
     # Comprobamos si ambos usuarios están en el mismo rango de edad
     return rango_usuario1 == rango_usuario2
 
 def obtener_generos_atraidos(orientacion, genero_propio):
     if orientacion == "heterosexual":
-        if genero_propio == "hombre":
-            return ["mujer"]
-        elif genero_propio == "mujer":
-            return ["hombre"]
+        if genero_propio == "masculino":
+            return ["femenino"]
+        elif genero_propio == "femenino":
+            return ["masculino"]
         elif genero_propio == "no binario":
-            return ["hombre", "mujer"]
+            return ["masculino", "femenino"]
     elif orientacion == "homosexual":
         return [genero_propio]
     elif orientacion == "bisexual":
-        return ["hombre", "mujer"]
+        return ["masculino", "femenino"]
     elif orientacion == "pansexual":
-        return ["hombre", "mujer", "no binario"]
+        return ["masculino", "femenino", "no binario"]
     return []
 
 def verificar_preferencias(usuario1, usuario2):
@@ -61,12 +60,12 @@ def obtener_usuarios_compatibles(id_usuario):
         if otro['id_usuario'] != id_usuario:
             if verificar_compatibilidad_edad(usuario, otro) and verificar_preferencias(usuario, otro):
                 compatibles.append({
-                    "id_usuario": otro['id_usuario'],
-                    "nombre": otro['nombre_usuario'],
-                    "edad": otro['edad'],
-                    "genero": otro['genero'],
+                    "id_usuario": otro.get('id_usuario'),
+                    "nombre": otro.get('nombre_usuario'),
+                    "edad": otro.get('edad'),
+                    "genero": otro.get('genero'),
                     "foto_perfil": otro.get('foto_perfil', "https://via.placeholder.com/100"),
-                    "bio": f"Soy {otro['nombre_usuario']}, podríamos conocernos."  # Puedes cambiar esto si tienes campo 'bio'
+                    "bio": otro.get('bio')
                 })
     return compatibles
 

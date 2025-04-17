@@ -9,7 +9,7 @@ def registrar_usuario_controlador():
     datos = request.get_json()
 
     # Validar la entrada
-    if not datos.get("nombre_usuario") or not datos.get("contrasena") or not datos.get("edad") or not datos.get("genero") or not datos.get("id_usuario") or not datos.get("orientacion_sexual"):
+    if not datos.get("nombre_usuario") or not datos.get("contrasena") or not datos.get("edad") or not datos.get("genero") or not datos.get("id_usuario") or not datos.get("orientacion_sexual") or not datos.get("bio"):
         return jsonify({"mensaje": "El nombre de usuario, la contraseña, la edad, el género y la orientación sexual son obligatorios"}), 400
     
     id_usuario = datos.get("id_usuario")
@@ -21,14 +21,14 @@ def registrar_usuario_controlador():
         return jsonify({"mensaje": "La edad debe ser un número válido"}), 400
     genero = datos.get("genero")
     orientacion_sexual = datos.get("orientacion_sexual")
-
+    bio = datos.get("bio")     
     # Validar que la orientación sexual esté en los valores permitidos
     if orientacion_sexual not in ["heterosexual", "bisexual", "homosexual", "pansexual"]:
         return jsonify({"mensaje": "La orientación sexual no es válida"}), 400
 
     foto = request.files.get("foto_perfil")  # Aquí obtenemos el archivo de la foto de perfil
     # Registrar al usuario
-    if registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual):
+    if registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual, bio, foto):
         return jsonify({"mensaje": "Usuario registrado correctamente"}), 201
     else:
         return jsonify({"mensaje": "El usuario ya existe o los datos no son válidos"}), 400

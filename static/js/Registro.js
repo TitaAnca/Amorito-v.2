@@ -8,6 +8,7 @@ document.getElementById('registroForm').addEventListener('submit', function (eve
     const edad = document.getElementById('edad').value;
     const genero = document.getElementById('genero').value;
     const orientacion_sexual = document.getElementById('orientacion_sexual').value;
+    const bio = document.getElementById('bio').value; // Obtener la biografía
 
     // Crear el objeto de datos
     const datos = {
@@ -16,7 +17,8 @@ document.getElementById('registroForm').addEventListener('submit', function (eve
         contrasena,
         edad,
         genero,
-        orientacion_sexual
+        orientacion_sexual,
+        bio
     };
 
     // Enviar los datos al backend usando Fetch API
@@ -32,7 +34,7 @@ document.getElementById('registroForm').addEventListener('submit', function (eve
         alert(data.mensaje);
         if (data.mensaje === "Usuario registrado exitosamente") {
             // Redirigir al login o a la página principal
-            window.location.href = '/login.html';  // Redirigir a la página de login
+            window.location.href = 'inicio_sesion';  // Redirigir a la página de login
         }
     })
     .catch(error => console.error('Error:', error));

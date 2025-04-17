@@ -5,7 +5,8 @@
         "contrasena": "1234",
         "edad": 19,
         "genero": "masculino",
-        "orientacion_sexual": "heterosexual"
+        "orientacion_sexual": "heterosexual",
+        "bio":""
     },
     {
         "id_usuario": "MBA",
@@ -13,6 +14,7 @@
         "contrasena": "12345",
         "edad": 19,
         "genero": "femenino",
-        "orientacion_sexual": "heterosexual"
+        "orientacion_sexual": "heterosexual",
+        "bio":""
     }
 ]

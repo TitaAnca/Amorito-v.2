@@ -29,4 +29,5 @@ def crear_match_controlador():
 
 def obtener_compatibles_controlador(id_usuario):
     compatibles = obtener_usuarios_compatibles(id_usuario)
+    print(f"Perfiles compatibles para {id_usuario}: {compatibles}")  # Esto ayudará a ver si se recuperan correctamente
     return jsonify(compatibles)

@@ -85,7 +85,6 @@ button:hover {
 
 #orientacion_sexual {
     font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color: #f7f4ede0;
 }
 #orientacion_sexual:option {
     background-color: #ca4343;
@@ -96,4 +95,25 @@ option:hover {
 }
 #genero {
     font-family: Georgia, 'Times New Roman', Times, serif
+}
+
+textarea {
+    width: 70%;
+    height: 120px;
+    padding: 12px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fafafa;
+    margin-bottom: 20px; /* Asegura un margen inferior */
+}
+
+/* Mejorar el estilo del label de la biografía */
+label[for="bio"] {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    color: #333;
 }

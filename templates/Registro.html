@@ -47,7 +47,11 @@
                 </select>
             </div>
         </div>
-        <button type="submit" onclick="window.location.href='Matches'" >Registrarse</button>
+        <div>
+            <label for="bio">Biografía:</label>
+            <textarea id="bio" name="bio" required placeholder="Cuéntanos un poco sobre ti..."></textarea>
+        </div>
+        <button type="submit">Registrarse</button>
     </form>
 
     <script src="{{ url_for('static', filename='js/Registro.js') }}"></script>

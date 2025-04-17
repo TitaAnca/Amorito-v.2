@@ -1,7 +1,8 @@
 let perfiles = [];
 let indiceActual = 0;
-let idUsuario = document.body.getAttribute("data-id");
+let idUsuario = document.body.getAttribute("data-id");  // Obtenemos el id_usuario desde el atributo data-id
 
+// Cargar perfiles compatibles desde el backend
 const cargarPerfiles = async () => {
     try {
         const res = await fetch(`/match/compatibles/${idUsuario}`);
@@ -13,6 +14,7 @@ const cargarPerfiles = async () => {
     }
 };
 
+// Mostrar el perfil actual
 const mostrarPerfil = () => {
     if (indiceActual < perfiles.length) {
         const perfil = perfiles[indiceActual];
@@ -25,6 +27,7 @@ const mostrarPerfil = () => {
     }
 };
 
+// Handle para hacer un match
 const handleMatch = async () => {
     const perfil = perfiles[indiceActual];
     try {
@@ -52,4 +55,5 @@ const handleMatch = async () => {
     mostrarPerfil();
 };
 
+// Inicializar la carga de perfiles cuando la página esté lista
 document.addEventListener("DOMContentLoaded", cargarPerfiles);

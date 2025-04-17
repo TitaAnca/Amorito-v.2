@@ -48,7 +48,7 @@ def guardar_foto_perfil(foto, id_usuario):
     return None  # Si no hay foto, retornamos None
 
 # Registrar un nuevo usuario
-def registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual, foto=None):
+def registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual, bio, foto=None):
     if not validar_genero(genero) or not validar_edad(edad) or not validar_orientacion(orientacion_sexual):
         return False  # Datos no válidos
 
@@ -63,7 +63,7 @@ def registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orie
         foto_perfil = guardar_foto_perfil(foto, id_usuario)
 
     # Crear el nuevo usuario
-    nuevo_usuario = Usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual)
+    nuevo_usuario = Usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual, bio, foto_perfil)
     usuarios.append(nuevo_usuario.a_dict())
     guardar_usuarios(usuarios)
     return True
@@ -84,7 +84,7 @@ def obtener_usuario_por_nombre(id_usuario):
     usuario = next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
     return usuario
 
-def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None, orientacion_sexual=None, foto=None):
+def actualizar_usuario(id_usuario, nombre_usuario, contrasena=None, edad=None, genero=None, orientacion_sexual=None, bio=None, foto=None):
     usuarios = obtener_todos_usuarios()
 
     # Buscar el usuario
@@ -94,7 +94,10 @@ def actualizar_usuario(id_usuario, contrasena=None, edad=None, genero=None, orie
         return False  # Usuario no encontrado
 
     usuario_obj = Usuario(**usuario)
-    usuario_obj.actualizar(contrasena, edad, genero, orientacion_sexual)
+    usuario_obj.actualizar(nombre_usuario, contrasena, edad, genero, orientacion_sexual)
+
+    if bio is not None:  # Solo actualizamos la bio si se proporciona
+        usuario_obj.actualizar(bio=bio)
 
     if foto:
         foto_perfil = guardar_foto_perfil(foto, id_usuario)

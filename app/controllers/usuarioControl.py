@@ -15,6 +15,7 @@ def actualizar_usuario_controlador():
     edad = datos.get("edad")
     genero = datos.get("genero")
     orientacion_sexual = datos.get("orientacion_sexual")
+    bio = datos.get("bio") 
 
     foto = request.files.get("foto_perfil")
     
@@ -22,7 +23,7 @@ def actualizar_usuario_controlador():
     if not id_usuario:
         return jsonify({"mensaje": "El ID de usuario es obligatorio"}), 400
 
-    if actualizar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual):
+    if actualizar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual, bio, foto):
         return jsonify({"mensaje": "Datos del usuario actualizados correctamente"}), 200
     else:
         return jsonify({"mensaje": "Usuario no encontrado"}), 404
