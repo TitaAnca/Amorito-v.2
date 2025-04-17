@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/Registro.css') }}">
 </head>
 <body>
-    <form id="registroForm">
+    <form id="registroForm" enctype="multipart/form-data">
         <div class="titulo">
             <h1>Registro de Usuario</h1>
         </div>
@@ -50,6 +50,12 @@
         <div>
             <label for="bio">Biografía:</label>
             <textarea id="bio" name="bio" required placeholder="Cuéntanos un poco sobre ti..."></textarea>
+        </div>
+        <div class="foto-container">
+            <label for="foto_perfil">Foto de Perfil:</label>
+            <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*" onchange="vistaPrevia(event)">
+            <label for="foto_perfil" class="foto-perfil-btn">Seleccionar Foto</label>
+            <img id="vista-previa" src="#" alt="Vista previa de la foto" />
         </div>
         <button type="submit">Registrarse</button>
     </form>

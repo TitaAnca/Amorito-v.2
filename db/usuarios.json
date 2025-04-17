@@ -6,7 +6,7 @@
         "edad": 19,
         "genero": "masculino",
         "orientacion_sexual": "heterosexual",
-        "bio":""
+        "bio": ""
     },
     {
         "id_usuario": "MBA",
@@ -15,6 +15,16 @@
         "edad": 19,
         "genero": "femenino",
         "orientacion_sexual": "heterosexual",
-        "bio":""
+        "bio": ""
+    },
+    {
+        "id_usuario": "prueba1",
+        "nombre_usuario": "prueba",
+        "contrasena": "1234",
+        "edad": 20,
+        "genero": "masculino",
+        "orientacion_sexual": "heterosexual",
+        "bio": "hola",
+        "foto_perfil": "static/Imagenes/perfiles\\prueba1_perfil_prueba.jpg"
     }
 ]
