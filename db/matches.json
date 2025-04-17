@@ -1,15 +1,1 @@
-[
-    {
-        "id_usuario_1": "prueba1",
-        "id_usuario_2": "MBA",
-        "estado": "pendienteRechazo",
-        "datos_match": {
-            "edad_usuario1": 20,
-            "edad_usuario2": 19,
-            "preferencia_usuario1": "heterosexual",
-            "preferencia_usuario2": "heterosexual",
-            "genero_usuario1": "masculino",
-            "genero_usuario2": "femenino"
-        }
-    }
-]
+[]
