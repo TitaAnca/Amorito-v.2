@@ -35,9 +35,6 @@ Amorito-v.2/
 │   │   ├── userRoutes.py        # Rutas para la gestión de usuarios
 │   │   ├── matchRoutes.py       # Rutas para gestionar las coincidencias
 │   │   └── messageRoutes.py     # Rutas para manejar los mensajes
-│   ├── middleware/          # Middleware (ej. autenticación, validaciones)
-│   │   ├── authMiddleware.py    # Middleware para manejar autenticación de JWT
-│   │   └── validateMiddleware.py  # Middleware para validaciones comunes
 │   ├── services/            # Lógica de negocio (interacción con modelos)
 │   │   ├── authService.py       # Lógica de autenticación, registro y JWT
 │   │   ├── userService.py       # Lógica para el manejo de perfiles de usuario
@@ -45,8 +42,6 @@ Amorito-v.2/
 │   │   └── messageService.py    # Lógica para el manejo de mensajes
 │   └── utils/               # Utilidades generales y helpers
 │       ├── fileUtils.py       # Funciones para manejo de archivos (subida de imágenes, etc.)
-│       ├── tokenUtils.py      # Funciones para manejar JWT
-│       └── validationUtils.py  # Funciones de validación de datos comunes
 │
 ├── db/                      # Carpeta que contiene las "bases de datos" (JSON o base de datos relacional)
 │   ├── users.json            # Información de usuarios (si usas JSON)
@@ -64,8 +59,6 @@ Amorito-v.2/
 │   ├── test_user.py         # Pruebas para la gestión de usuarios
 │   ├── test_match.py        # Pruebas para el emparejamiento de usuarios
 │   └── test_message.py      # Pruebas para los mensajes entre usuarios
-│
-├── .gitignore               # Archivos y carpetas a ignorar en el control de versiones
 ├── requirements.txt         # Dependencias del proyecto en Python
 ├── run.py                   # Archivo para ejecutar la API
 └── README.md                # Documentación del proyecto
