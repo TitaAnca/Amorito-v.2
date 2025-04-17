@@ -39,13 +39,16 @@ def validar_orientacion(orientacion):
         return False
     return True
 
+
 def guardar_foto_perfil(foto, id_usuario):
     if foto:
         filename = secure_filename(foto.filename)  # Asegurarse de que el nombre del archivo sea seguro
         foto_path = os.path.join(UPLOAD_FOLDER, f"{id_usuario}_{filename}")
         foto.save(foto_path)  # Guardamos la foto en el directorio correspondiente
-        return foto_path  # Devolvemos la ruta de la foto guardada
-    return None  # Si no hay foto, retornamos None
+        # Convertir la ruta de archivo del sistema operativo a una ruta de URL con barras normales
+        foto_url = foto_path.replace(os.path.sep, "/")  # Convertir las barras del sistema en barras URL-friendly
+        return foto_url  # Devolvemos la ruta de la foto para la URL (ej. 'static/Imagenes/perfiles/carlitos123_perfil_prueba.jpg')
+    return None
 
 # Registrar un nuevo usuario
 def registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual, bio, foto=None):

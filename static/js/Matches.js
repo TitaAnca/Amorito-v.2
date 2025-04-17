@@ -21,7 +21,7 @@ const mostrarPerfil = () => {
         document.getElementById("name").textContent = perfil.nombre;
         document.getElementById("age").textContent = `Edad: ${perfil.edad}`;
         document.getElementById("bio").textContent = perfil.bio;
-        document.querySelector(".card img").src = perfil.foto_perfil;
+        document.querySelector(".card img").src = "/static" + perfil.foto_perfil.replace('static', '');
     } else {
         document.getElementById("profile-card").innerHTML = "<p>No hay más perfiles compatibles disponibles.</p>";
     }
