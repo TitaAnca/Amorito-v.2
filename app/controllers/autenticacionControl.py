@@ -2,6 +2,7 @@ from flask import request, jsonify
 from werkzeug.utils import secure_filename
 import _osx_support
 from app.servicios.usuarioServicio import registrar_usuario, iniciar_sesion
+from flask import redirect, url_for
 
 # Ruta de registro
 def registrar_usuario_controlador():
@@ -40,11 +41,12 @@ def iniciar_sesion_controlador():
     if not datos.get("id_usuario") or not datos.get("contrasena"):
         return jsonify({"mensaje": "El nombre de usuario y la contraseña son obligatorios"}), 400
 
-    id_usuario = datos.get("nombre_usuario")
+    id_usuario = datos.get("id_usuario")
     contrasena = datos.get("contrasena")
 
     # Verificar si el inicio de sesión es exitoso
     if iniciar_sesion(id_usuario, contrasena):
-        return jsonify({"mensaje": "Inicio de sesión exitoso"}), 200
+        # Redirigir a la página de Matches con el id_usuario
+        return redirect(url_for('matches', id_usuario=id_usuario))
     else:
         return jsonify({"mensaje": "Usuario o contraseña incorrectos"}), 401

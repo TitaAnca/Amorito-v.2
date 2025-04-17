@@ -24,9 +24,10 @@ def create_app():
     def iniciarSesion():
         return render_template('Inicio_sesion.html')
 
-    @app.route('/Matches')
-    def iniciar_sesion():
-        return render_template('Matches.html')
+    @app.route('/matches/<id_usuario>')
+    def matches(id_usuario):
+        # Aquí puedes cargar los datos específicos del usuario con el id_usuario
+        return render_template('Matches.html', id_usuario=id_usuario)
 
     # Registrar los blueprints
     app.register_blueprint(usuario_bp)

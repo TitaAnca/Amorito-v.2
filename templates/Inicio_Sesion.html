@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Usuario</title>
+    <title>Inicio de Sesión</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/inicio_sesion.css') }}">
 </head>
 <body>
@@ -14,15 +14,15 @@
             </div>
             <div>
                 <label for="id_usuario">ID de Usuario:</label>
-                <input type="text" id="id_usuario" name="id_usuario" required placeholder="Ej: Mimi_1
-                ">
+                <input type="text" id="id_usuario" name="id_usuario" required placeholder="Ej: Mimi_1">
             </div>
             <div>
                 <label for="contrasena">Contraseña:</label>
                 <input type="password" id="contrasena" name="contrasena" required placeholder="¡Recuerda poner una contraseña segura!">
             </div>
             
-            <button type="submit" onclick="window.location.href='Matches'">Iniciar Sesión</button>
+            <!-- Elimina el onclick del botón -->
+            <button type="submit">Iniciar Sesión</button>
         </form>
     </div>
     <script src="{{ url_for('static', filename='js/inicio_sesion.js') }}"></script>
