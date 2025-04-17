@@ -1,4 +1,4 @@
-from app.servicios.matchServicio import crear_match, obtener_usuarios_compatibles
+from app.servicios.matchServicio import crear_match, rechazar_match, obtener_usuarios_compatibles
 from flask import jsonify, request
 
 def crear_match_controlador():
@@ -19,15 +19,42 @@ def crear_match_controlador():
                 "mensaje": "¡Es un match!",
                 "match": match.to_dict()
             }), 201
+        elif match.estado == "pendienteRechazo":
+            return jsonify({
+                "mensaje": "No hay match :(",
+                "match": match.to_dict()
+            }), 200
         else:
             return jsonify({
-                "mensaje": "Aún no ha habido respuesta del otro usuario",
+                "mensaje": "Esperando respuesta",
                 "match": match.to_dict()
             }), 200
     else:
         return jsonify({"error": "Error al intentar hacer match"}), 400
+    
+def rechazar_match_controlador():
+    id_usuario1 = request.json.get('id_usuario1')
+    id_usuario2 = request.json.get('id_usuario2')
+
+    # Validación de los ID de usuario
+    if not id_usuario1 or not id_usuario2:
+        return jsonify({"error": "Ambos ID de usuario son requeridos"}), 400
+
+    if id_usuario1 == id_usuario2:
+        return jsonify({"error": "Un usuario no puede rechazar a sí mismo"}), 400
+
+    # Intentar rechazar el match
+    match = rechazar_match(id_usuario1, id_usuario2)
+
+    if match:
+        return jsonify({
+            "mensaje": "No hay match :(",
+            "match": match.to_dict()
+        }), 200
+    else:
+        return jsonify({"error": "Error al intentar rechazar el match"}), 400
+
 
 def obtener_compatibles_controlador(id_usuario):
     compatibles = obtener_usuarios_compatibles(id_usuario)
-    print(f"Perfiles compatibles para {id_usuario}: {compatibles}")  # Esto ayudará a ver si se recuperan correctamente
     return jsonify(compatibles)

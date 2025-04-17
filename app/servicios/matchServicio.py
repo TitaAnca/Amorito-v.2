@@ -1,11 +1,19 @@
 from app.modelos.matchModelo import Match
 import json
+import os
 
 def obtener_usuario_por_id(id_usuario):
     # Aquí buscamos el usuario por su ID en la base de datos, en este caso lo hacemos con JSON.
     with open('db/usuarios.json') as f:
         usuarios = json.load(f)
     return next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
+
+def actualizar_matches(matches):
+    try:
+        with open('db/matches.json', 'w') as f:
+            json.dump(matches, f, indent=4)
+    except Exception as e:
+        raise Exception(f"Error al guardar el archivo de usuarios: {str(e)}")
 
 def verificar_compatibilidad_edad(usuario1, usuario2):
     # Definimos los rangos de edad
@@ -69,8 +77,6 @@ def obtener_usuarios_compatibles(id_usuario):
                 })
     return compatibles
 
-import os
-
 def crear_match(id_usuario1, id_usuario2):
     usuario1 = obtener_usuario_por_id(id_usuario1)
     usuario2 = obtener_usuario_por_id(id_usuario2)
@@ -79,42 +85,81 @@ def crear_match(id_usuario1, id_usuario2):
         return None
 
     matches_path = 'db/matches.json'
-    matches = []
-
+    
     # Cargar los matches existentes
+    matches = []
     if os.path.exists(matches_path):
         with open(matches_path, 'r') as f:
-            matches = [json.loads(line) for line in f if line.strip()]
+            matches = json.load(f)
 
-    # ¿Ya existe un match inverso (el otro ya te dio like)?
-    for match in matches:
-        if match['id_usuario_1'] == id_usuario2 and match['id_usuario_2'] == id_usuario1:
-            if match['estado'] == 'pendiente':
-                match['estado'] = 'aceptado'
-                # Sobrescribimos todo el archivo con el match actualizado
-                with open(matches_path, 'w') as f:
-                    for m in matches:
-                        json.dump(m, f)
-                        f.write('\n')
-                return Match(id_usuario1, id_usuario2, 'aceptado', match['datos_match'])
-
-            elif match['estado'] == 'aceptado':
-                return Match(id_usuario1, id_usuario2, 'aceptado', match['datos_match'])
+    # Buscar si ya existe un match inverso
+    if matches: 
+        for match in matches:
+            if match['id_usuario_1'] == id_usuario2 and match['id_usuario_2'] == id_usuario1:
+                if match['estado'] == 'pendiente':
+                    match['estado'] = 'aceptado'
+                    actualizar_matches(matches)  # Guardar los cambios en el archivo
+                    return Match(id_usuario1, id_usuario2, 'aceptado', match['datos_match'])
+                elif match['estado'] == 'pendienteRechazo':
+                    match['estado'] = 'rechazado'
+                    actualizar_matches(matches)  # Guardar los cambios en el archivo
+                    return Match(id_usuario1, id_usuario2, 'rechazado', match['datos_match'])
 
     # Si no existe el inverso, lo creamos como pendiente
     datos_match = {
         'edad_usuario1': usuario1['edad'],
         'edad_usuario2': usuario2['edad'],
-        'preferencia_usuario1': usuario1['preferencia'],
-        'preferencia_usuario2': usuario2['preferencia'],
+        'preferencia_usuario1': usuario1['orientacion_sexual'],
+        'preferencia_usuario2': usuario2['orientacion_sexual'],
         'genero_usuario1': usuario1['genero'],
         'genero_usuario2': usuario2['genero'],
     }
 
     nuevo_match = Match(id_usuario1, id_usuario2, 'pendiente', datos_match)
+    matches.append(nuevo_match.__dict__)
+    actualizar_matches(matches)  # Guardar el nuevo match
+    return nuevo_match
 
-    with open(matches_path, 'a') as f:
-        json.dump(nuevo_match.__dict__, f)
-        f.write('\n')
 
+# Función para rechazar un match
+def rechazar_match(id_usuario1, id_usuario2):
+    usuario1 = obtener_usuario_por_id(id_usuario1)
+    usuario2 = obtener_usuario_por_id(id_usuario2)
+
+    if not usuario1 or not usuario2:
+        return None
+
+    matches_path = 'db/matches.json'
+    
+    # Cargar los matches existentes
+    matches = []
+    if os.path.exists(matches_path):
+        with open(matches_path, 'r') as f:
+            matches = [json.loads(line) for line in f if line.strip()]
+
+    # Buscar si ya existe un match inverso
+    for match in matches:
+        if match['id_usuario_1'] == id_usuario2 and match['id_usuario_2'] == id_usuario1:
+            if match['estado'] == 'pendiente':
+                match['estado'] = 'rechazado'
+                actualizar_matches(matches)  # Guardar los cambios en el archivo
+                return Match(id_usuario1, id_usuario2, 'rechazado', match['datos_match'])
+            elif match['estado'] == 'pendienteRechazo':
+                match['estado'] = 'rechazado'
+                actualizar_matches(matches)  # Guardar los cambios en el archivo
+                return Match(id_usuario1, id_usuario2, 'rechazado', match['datos_match'])
+
+    # Si no existe el inverso, lo creamos como pendiente de rechazo
+    datos_match = {
+        'edad_usuario1': usuario1['edad'],
+        'edad_usuario2': usuario2['edad'],
+        'preferencia_usuario1': usuario1['orentacion_sexual'],
+        'preferencia_usuario2': usuario2['orientacion_sexual'],
+        'genero_usuario1': usuario1['genero'],
+        'genero_usuario2': usuario2['genero'],
+    }
+
+    nuevo_match = Match(id_usuario1, id_usuario2, 'pendienteRechazo', datos_match)
+    matches.append(nuevo_match.__dict__)
+    actualizar_matches(matches)  # Guardar el nuevo match
     return nuevo_match

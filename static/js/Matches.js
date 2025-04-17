@@ -28,7 +28,7 @@ const mostrarPerfil = () => {
 };
 
 // Handle para hacer un match
-const handleMatch = async () => {
+const manejarMatch = async () => {
     const perfil = perfiles[indiceActual];
     try {
         const res = await fetch('/match/crear_match', {
@@ -51,6 +51,34 @@ const handleMatch = async () => {
         alert("Error en el servidor.");
     }
 
+    indiceActual++;
+    mostrarPerfil();
+};
+
+const manejarRechazo = async () => {
+    const perfil = perfiles[indiceActual];
+    try {
+        const res = await fetch('/match/rechazar_match', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                id_usuario1: idUsuario,
+                id_usuario2: perfil.id_usuario
+            })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            alert(data.mensaje);  // Alerta con el mensaje de rechazo
+        } else {
+            alert(data.error || "No se pudo rechazar el perfil.");
+        }
+    } catch (error) {
+        alert("Error en el servidor.");
+    }
+
+    // Avanzamos al siguiente perfil
     indiceActual++;
     mostrarPerfil();
 };
