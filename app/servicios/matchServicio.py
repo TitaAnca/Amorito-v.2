@@ -14,6 +14,22 @@ def actualizar_matches(matches):
             json.dump(matches, f, indent=4)
     except Exception as e:
         raise Exception(f"Error al guardar el archivo de usuarios: {str(e)}")
+    
+def ya_existe_match_o_rechazo(id1, id2):
+    matches_path = 'db/matches.json'
+    
+    # Cargar los matches existentes
+    matches = []
+    if os.path.exists(matches_path):
+        with open(matches_path, 'r') as f:
+            matches = json.load(f)
+    for match in matches:
+        if (
+            (match["id_usuario_1"] == id1 and match["id_usuario_2"] == id2) or
+            (match["id_usuario_1"] == id2 and match["id_usuario_2"] == id1)
+        ) and match["estado"] in ["aceptado", "rechazado"]:
+            return True
+    return False
 
 def verificar_compatibilidad_edad(usuario1, usuario2):
     # Definimos los rangos de edad
@@ -66,6 +82,9 @@ def obtener_usuarios_compatibles(id_usuario):
     compatibles = []
     for otro in todos:
         if otro['id_usuario'] != id_usuario:
+            if ya_existe_match_o_rechazo(id_usuario, otro['id_usuario']):
+                continue  # Ya existe un match o rechazo, no es compatible
+
             if verificar_compatibilidad_edad(usuario, otro) and verificar_preferencias(usuario, otro):
                 compatibles.append({
                     "id_usuario": otro.get('id_usuario'),
@@ -75,6 +94,7 @@ def obtener_usuarios_compatibles(id_usuario):
                     "foto_perfil": otro.get('foto_perfil', "https://via.placeholder.com/100"),
                     "bio": otro.get('bio')
                 })
+
     return compatibles
 
 def crear_match(id_usuario1, id_usuario2):

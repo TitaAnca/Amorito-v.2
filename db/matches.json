@@ -1,67 +1,15 @@
 [
     {
-        "id_usuario_1": "carlitos123",
-        "id_usuario_2": "MBA",
-        "estado": "pendiente",
+        "id_usuario_1": "Val01",
+        "id_usuario_2": "carlitos123",
+        "estado": "aceptado",
         "datos_match": {
             "edad_usuario1": 19,
             "edad_usuario2": 19,
             "preferencia_usuario1": "heterosexual",
             "preferencia_usuario2": "heterosexual",
-            "genero_usuario1": "masculino",
-            "genero_usuario2": "femenino"
-        }
-    },
-    {
-        "id_usuario_1": "carlitos123",
-        "id_usuario_2": "MBA",
-        "estado": "pendiente",
-        "datos_match": {
-            "edad_usuario1": 19,
-            "edad_usuario2": 19,
-            "preferencia_usuario1": "heterosexual",
-            "preferencia_usuario2": "heterosexual",
-            "genero_usuario1": "masculino",
-            "genero_usuario2": "femenino"
-        }
-    },
-    {
-        "id_usuario_1": "carlitos123",
-        "id_usuario_2": "MBA",
-        "estado": "pendienteRechazo",
-        "datos_match": {
-            "edad_usuario1": 19,
-            "edad_usuario2": 19,
-            "preferencia_usuario1": "heterosexual",
-            "preferencia_usuario2": "heterosexual",
-            "genero_usuario1": "masculino",
-            "genero_usuario2": "femenino"
-        }
-    },
-    {
-        "id_usuario_1": "carlitos123",
-        "id_usuario_2": "MBA",
-        "estado": "pendienteRechazo",
-        "datos_match": {
-            "edad_usuario1": 19,
-            "edad_usuario2": 19,
-            "preferencia_usuario1": "heterosexual",
-            "preferencia_usuario2": "heterosexual",
-            "genero_usuario1": "masculino",
-            "genero_usuario2": "femenino"
-        }
-    },
-    {
-        "id_usuario_1": "carlitos123",
-        "id_usuario_2": "Val01",
-        "estado": "pendiente",
-        "datos_match": {
-            "edad_usuario1": 19,
-            "edad_usuario2": 19,
-            "preferencia_usuario1": "heterosexual",
-            "preferencia_usuario2": "heterosexual",
-            "genero_usuario1": "masculino",
-            "genero_usuario2": "femenino"
+            "genero_usuario1": "femenino",
+            "genero_usuario2": "masculino"
         }
     }
 ]
