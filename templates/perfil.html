@@ -15,10 +15,11 @@
     <!-- Barra lateral fija y angosta -->
 
     <div class="sidebar">
-        <a href="#"><i class="fas fa-user"></i></a>
-        <a href="#"><i class="fas fa-heart"></i></a>
-        <a href="#"><i class="fas fa-comment-alt"></i></a>
-        <a href=""><i class="fas fa-sign-out-alt"></i></a>
+        <!-- Enlace al perfil -->
+        <a href="/perfil/{{ id_usuario }}"><i class="fas fa-user"></i></a>
+        <a href="/matches/{{ id_usuario }}"><i class="fas fa-heart"></i></a>
+        <a href="/chat/{{ id_usuario }}"><i class="fas fa-comment-alt"></i></a>
+        <a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i></a>
     </div>
 
     <div class="profile-wrapper">

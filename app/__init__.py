@@ -29,9 +29,12 @@ def create_app():
         # Aquí puedes cargar los datos específicos del usuario con el id_usuario
         return render_template('Matches.html', id_usuario=id_usuario)
     @app.route('/perfil/<id_usuario>')
-    def mostrar_perfil():
-        return render_template('perfil.html')
+    def mostrar_perfil(id_usuario):
+        return render_template('perfil.html', id_usuario=id_usuario)
     
+    @app.route('/chat/<id_usuario>')
+    def chat(id_usuario):
+        return render_template('Chat.html', id_usuario=id_usuario)
     # Registrar los blueprints
     app.register_blueprint(usuario_bp)
     app.register_blueprint(mensaje_bp)
