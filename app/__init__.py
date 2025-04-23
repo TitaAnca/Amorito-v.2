@@ -28,7 +28,10 @@ def create_app():
     def matches(id_usuario):
         # Aquí puedes cargar los datos específicos del usuario con el id_usuario
         return render_template('Matches.html', id_usuario=id_usuario)
-
+    @app.route('/perfil/<id_usuario>')
+    def mostrar_perfil():
+        return render_template('perfil.html')
+    
     # Registrar los blueprints
     app.register_blueprint(usuario_bp)
     app.register_blueprint(mensaje_bp)

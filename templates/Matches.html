@@ -1,15 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de Match</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/matches.css') }}">
 </head>
+
 <body data-id="{{ id_usuario }}">
+    <div class="sidebar">
+        <a href="perfil"><i class="fas fa-user"> </i></a>
+        <a href="#"><i class="fas fa-heart"></i></a>
+        <a href="#"><i class="fas fa-comment-alt"></i></a>
+        <a href=""><i class="fas fa-sign-out-alt"></i></a>
+    </div>
     <div class="card" id="profile-card">
         <img src="https://via.placeholder.com/100" alt="Foto de perfil">
-        <div class=""><h2 id="name">Nombre</h2>
+        <div class="">
+            <h2 id="name">Nombre</h2>
             <p id="age">Edad: 25</p>
             <p id="bio">Bio: Soy una persona apasionada por la tecnología y los viajes.</p>
             <div class="buttons">
@@ -17,8 +27,9 @@
                 <button class="reject" onclick="manejarRechazo()">Rechazar</button>
             </div>
         </div>
-        
+
     </div>
     <script src="{{ url_for('static', filename='js/matches.js') }}"></script>
 </body>
+
 </html>
