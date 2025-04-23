@@ -1,0 +1,113 @@
+body {
+
+    padding: 75px;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../img/fondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+
+#chat {
+    width: 450px;
+    padding: 20px;
+    background-color: rgb(233, 231, 221);
+    border-radius: 20px;
+
+}
+
+#room-name {
+    color: white;
+}
+
+.volver {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+
+.cabecero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: #a03131;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    color: white;
+}
+
+.icono {
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+.icono-usuario {
+    margin-left: 10px;
+
+}
+
+.icono-telefono {
+    margin-right: 10px;
+
+}
+
+
+.enviarMensajes {
+    display: flex;
+    justify-content: space-between;
+}
+
+#mensajes {
+    height: 300px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+#mensaje-input {
+    width: 70%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px rgb(189, 185, 185);
+}
+
+#enviarBoton {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    background-color: #365025;
+}
+
+#enviarBoton:hover {
+    background-color: #365025,
+}
+
+#mensajes p {
+    max-width: 70%;
+    padding: 20px;
+    margin: 5px 0;
+    border-radius: 5px;
+}
+
+.mensaje-otro {
+    background-color: #cd5959ef;
+    align-self: flex-start;
+}
+
+.mi-mensaje {
+    background-color: hsl(120, 18%, 40%);
+    color: white;
+    align-self: flex-end;
+}
