@@ -134,22 +134,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 async function cargarPerfilUsuario() {
-    const id_usuario = document.body.dataset.id;
+    fetch("/usuario/obtener/usuario123")  // Aquí pones el ID del usuario que se desea obtener
+        .then(response => response.json())
+        .then(perfil => {
+            // Cargar los datos del usuario en la tarjeta de perfil
+            document.getElementById("username").innerText = perfil.nombre_usuario;
+            document.getElementById("handle").innerText = perfil.id_usuario;
+            document.getElementById("location").innerText = perfil.edad;
+            document.getElementById("member-date").innerText = perfil.genero;
+            document.getElementById("interests").innerText = perfil.orientacion_sexual;
 
-    try {
-        const response = await fetch(`/usuario/obtener/${id_usuario}`);
-        if (!response.ok) throw new Error("No se pudo obtener el perfil.");
+            // Actualizar la foto de perfil
+            document.querySelector(".profile-image-container img").src = "/static" + perfil.foto_perfil.replace('static', '');
+        })
+        .catch(error => console.error("Error al obtener los datos del usuario:", error));
 
-        const data = await response.json();
-
-        document.getElementById("username").innerText = data.nombre_usuario;
-        document.getElementById("handle").innerText = data.id_usuario;
-        document.getElementById("location").innerText = data.edad;
-        document.getElementById("member-date").innerText = data.genero;
-        document.getElementById("interests").innerText = data.orientacion_sexual;
-    } catch (error) {
-        console.error("Error al cargar datos del perfil:", error);
-    }
 }
 
 // Llamamos a la función al cargar la página
