@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat en la Sala</title>
+    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="chat">
+        <!--<div class="cabecero">
+        
+        <h2><span id="room-name"></span></h2>
+        <a href="/"><button class="volver">Inicio</button></a>
+      </div> -->
+        <div class="cabecero">
+            <i class="icono icono-usuario fas fa-user"></i>
+            <h2>Nombre del match</h2>
+            <i class="icono icono-telefono fas fa-phone"></i>
+        </div>
+
+        <div id="status-mensaje"></div>
+        <div id="mensajes"></div>
+        <div class="enviarMensajes">
+            <input type="text" id="mensaje-input" placeholder="Escribe un mensaje...">
+            <button id="enviarBoton">Enviar</button>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/chat.js"></script>
+</body>
+
+</html>
