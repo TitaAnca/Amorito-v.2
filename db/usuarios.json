@@ -10,8 +10,8 @@
         "foto_perfil": "static/Imagenes/perfiles/carlitos123_perfil_prueba.jpg"
     },
     {
-        "id_usuario": "MBA",
-        "nombre_usuario": "Manal",
+        "id_usuario": "Val01",
+        "nombre_usuario": "Valeria",
         "contrasena": "12345",
         "edad": 19,
         "genero": "femenino",
