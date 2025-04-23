@@ -1,4 +1,4 @@
-from app.servicios.matchServicio import crear_match, rechazar_match, obtener_usuarios_compatibles
+from app.servicios.matchServicio import crear_match, rechazar_match, obtener_usuarios_compatibles, obtener_usuarios_con_match
 from flask import jsonify, request
 
 def crear_match_controlador():
@@ -58,3 +58,10 @@ def rechazar_match_controlador():
 def obtener_compatibles_controlador(id_usuario):
     compatibles = obtener_usuarios_compatibles(id_usuario)
     return jsonify(compatibles)
+
+def obtener_matches_controlador(id_usuario):
+    try:
+        usuarios_con_match = obtener_usuarios_con_match(id_usuario)
+        return jsonify(usuarios_con_match), 200
+    except Exception as e:
+        return jsonify({"mensaje": "Error al obtener matches", "error": str(e)}), 500

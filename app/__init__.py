@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for, session
 from app.rutas.usuarRUTAS import usuario_bp
 from app.rutas.mesjRUTA import mensaje_bp
 from app.rutas.matchRUTA import match_bp
@@ -10,7 +10,6 @@ def create_app():
     app = Flask(__name__,
                 static_folder="../static",  # Archivos estáticos (CSS, JS)
                 template_folder="../templates")  # Plantillas HTML
-
     # Configuración de la aplicación (Cargar configuración del entorno)
     @app.route('/')
     def index():
@@ -35,14 +34,13 @@ def create_app():
     @app.route('/chat/<id_usuario>')
     def chat(id_usuario):
         return render_template('Chat.html', id_usuario=id_usuario)
+    @app.route('/cerrar_sesion')
+    def cerrar_sesion():
+        return redirect(url_for('iniciarSesion')) 
     # Registrar los blueprints
     app.register_blueprint(usuario_bp)
     app.register_blueprint(mensaje_bp)
     app.register_blueprint(match_bp)
     app.register_blueprint(autent_bp)
-
-
-
-    # Ruta principal que devuelve la página de registro
 
     return app
