@@ -43,8 +43,4 @@ def create_app():
     app.register_blueprint(match_bp)
     app.register_blueprint(autent_bp)
 
-
-
-    # Ruta principal que devuelve la página de registro
-
     return app
