@@ -8,25 +8,34 @@ from app.servicios.usuarioServicio import (
 )
 
 def actualizar_usuario_controlador():
-    datos = request.get_json()
-    id_usuario = datos.get("id_usuario")
-    nombre_usuario = datos.get("nombre_usuario")
-    contrasena = datos.get("contrasena")
-    edad = datos.get("edad")
-    genero = datos.get("genero")
-    orientacion_sexual = datos.get("orientacion_sexual")
-    bio = datos.get("bio") 
+    try:
+        id_usuario = request.form.get("id_usuario")
+        nombre_usuario = request.form.get("nombre_usuario")
+        contrasena = request.form.get("contrasena")
+        edad = request.form.get("edad")
+        genero = request.form.get("genero")
+        orientacion_sexual = request.form.get("orientacion_sexual")
+        bio = request.form.get("bio")
+        foto = request.files.get("foto_perfil")
 
-    foto = request.files.get("foto_perfil")
-    
-    # Verificar si el ID de usuario está presente
-    if not id_usuario:
-        return jsonify({"mensaje": "El ID de usuario es obligatorio"}), 400
+        if not id_usuario:
+            return jsonify({"mensaje": "El ID de usuario es obligatorio"}), 400
 
-    if actualizar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual, bio, foto):
-        return jsonify({"mensaje": "Datos del usuario actualizados correctamente"}), 200
-    else:
-        return jsonify({"mensaje": "Usuario no encontrado"}), 404
+        resultado = actualizar_usuario(
+            id_usuario, nombre_usuario, contrasena, int(edad) if edad else None,
+            genero, orientacion_sexual, bio, foto
+        )
+
+        if resultado:
+            return jsonify({"mensaje": "Datos del usuario actualizados correctamente"}), 200
+        else:
+            return jsonify({"mensaje": "Usuario no encontrado"}), 404
+
+    except ValueError as ve:
+        return jsonify({"mensaje": str(ve)}), 400
+    except Exception as e:
+        return jsonify({"mensaje": "Error al actualizar el usuario", "error": str(e)}), 500
+
 
 def obtener_usuario_controlador(id_usuario):
     usuario = obtener_usuario_por_nombre(id_usuario)
