@@ -11,12 +11,52 @@
     },
     {
         "id_usuario": "Val01",
-        "nombre_usuario": "Valeria",
+        "nombre_usuario": "Valeria Garza",
         "contrasena": "12345",
-        "edad": 19,
+        "edad": 32,
+        "genero": "masculino",
+        "orientacion_sexual": "heterosexual",
+        "bio": "Hagamos que nuestro d\u00fao sea el m\u00e1s letal de Warzone, sin necesidad de respawnear. \ud83c\udfae",
+        "foto_perfil": "static/Imagenes/perfiles/Val01_Valeria_pfp.jpg"
+    },
+    {
+        "id_usuario": "Ellie01",
+        "nombre_usuario": "Ellie Williams",
+        "contrasena": "12345",
+        "edad": 32,
+        "genero": "masculino",
+        "orientacion_sexual": "heterosexual",
+        "bio": "De ser un zombie no me habr\u00eda importado darte un mordisco.",
+        "foto_perfil": "static/Imagenes/perfiles/Ellie01_ellie_the_last_of_us.jpg"
+    },
+    {
+        "id_usuario": "Joel01",
+        "nombre_usuario": "Joel Miller",
+        "contrasena": "12345",
+        "edad": 32,
+        "genero": "masculino",
+        "orientacion_sexual": "heterosexual",
+        "bio": "Viejo cascarrabias de buen coraz\u00f3n \r\n\r\nPD: Cuenta claramente hecha por Joel y no Ellie...",
+        "foto_perfil": "static/Imagenes/perfiles/Joel01_joel.jpg"
+    },
+    {
+        "id_usuario": "Kim01",
+        "nombre_usuario": "Kimmy Kim",
+        "contrasena": "12345",
+        "edad": 32,
+        "genero": "masculino",
+        "orientacion_sexual": "heterosexual",
+        "bio": "Kim Jong-Who? Me and you ;)",
+        "foto_perfil": "static/Imagenes/perfiles/Kim01_40_Savage_Memes_To_Keep_You_Laughing.jpg"
+    },
+    {
+        "id_usuario": "Prueba",
+        "nombre_usuario": "Prueba",
+        "contrasena": "12345",
+        "edad": 32,
         "genero": "femenino",
         "orientacion_sexual": "heterosexual",
-        "bio": ".",
-        "foto_perfil": "static/Imagenes/perfiles/MBA_perfil_prueba_2.jpg"
+        "bio": "Si los idiotas pudieran volar, esto ser\u00eda un aeropuerto.",
+        "foto_perfil": "static/Imagenes/perfiles/Prueba_6ba6ad888a6573450ee1fa89005f6038.jpg"
     }
 ]
