@@ -97,8 +97,8 @@ def actualizar_usuario(id_usuario, nombre_usuario, contrasena=None, edad=None, g
         return False  # Usuario no encontrado
 
     usuario_obj = Usuario(**usuario)
-    usuario_obj.actualizar(nombre_usuario, contrasena, edad, genero, orientacion_sexual)
-
+    usuario_obj.actualizar(nombre_usuario, contrasena, edad, genero, orientacion_sexual, bio, foto)
+    
     if bio is not None:  # Solo actualizamos la bio si se proporciona
         usuario_obj.actualizar(bio=bio)
 

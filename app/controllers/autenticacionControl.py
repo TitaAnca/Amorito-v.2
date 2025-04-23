@@ -1,6 +1,5 @@
 from flask import request, jsonify
 from werkzeug.utils import secure_filename
-import _osx_support
 from app.servicios.usuarioServicio import registrar_usuario, iniciar_sesion
 from flask import redirect, url_for
 
