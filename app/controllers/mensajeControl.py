@@ -1,32 +1,27 @@
 from flask import request, jsonify
-from app.servicios.mensajeServicio import ServicioMensaje
-from datetime import datetime
+from app.servicios.mensajeServicio import enviar_mensaje, obtener_conversacion
 
-servicio_mensaje = ServicioMensaje()
+def enviar_mensaje_controlador():
+    try:
+        data = request.form or request.json
+        id_emisor = data.get("id_emisor")
+        id_receptor = data.get("id_receptor")
+        contenido = data.get("contenido")
 
-def enviar_mensaje():
-    datos = request.get_json()
+        if not id_emisor or not id_receptor or not contenido:
+            return jsonify({"mensaje": "Datos incompletos"}), 400
 
-    id_emisor = datos.get('id_emisor')
-    id_receptor = datos.get('id_receptor')
-    contenido = datos.get('contenido')
+        enviar_mensaje(id_emisor, id_receptor, contenido)
+        return jsonify({"mensaje": "Mensaje enviado"}), 200
 
-    if not id_emisor or not id_receptor or not contenido:
-        return jsonify({"error": "Faltan campos requeridos"}), 400
+    except ValueError as ve:
+        return jsonify({"error": str(ve)}), 403
+    except Exception as e:
+        return jsonify({"error": "Error al enviar mensaje", "detalle": str(e)}), 500
 
-    timestamp = datetime.now().isoformat()
-    mensaje = servicio_mensaje.crear_mensaje(id_emisor, id_receptor, contenido, timestamp)
-    
-    if mensaje:
-        return jsonify(mensaje.a_dict()), 201
-    return jsonify({"error": "No se pudo crear el mensaje"}), 500
-
-def obtener_mensajes():
-    id_emisor = request.args.get('id_emisor')
-    id_receptor = request.args.get('id_receptor')
-
-    if not id_emisor or not id_receptor:
-        return jsonify({"error": "Faltan campos requeridos"}), 400
-
-    mensajes = servicio_mensaje.obtener_mensajes(id_emisor, id_receptor)
-    return jsonify([mensaje.a_dict() for mensaje in mensajes]), 200
+def obtener_conversacion_controlador(id_usuario_1, id_usuario_2):
+    try:
+        mensajes = obtener_conversacion(id_usuario_1, id_usuario_2)
+        return jsonify(mensajes), 200
+    except Exception as e:
+        return jsonify({"error": "Error al obtener la conversación", "detalle": str(e)}), 500

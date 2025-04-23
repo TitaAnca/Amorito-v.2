@@ -2,6 +2,26 @@ from app.modelos.matchModelo import Match
 import json
 import os
 
+MATCHES_DB_PATH = "db/matches.json"
+
+def cargar_matches():
+    try:
+        with open(MATCHES_DB_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except FileNotFoundError:
+        return []
+
+def obtener_usuarios_con_match(id_usuario):
+    matches = cargar_matches()
+    usuarios = []
+    for match in matches:
+        if match["estado"] == "aceptado":
+            if match["id_usuario_1"] == id_usuario:
+                usuarios.append(match["id_usuario_2"])
+            elif match["id_usuario_2"] == id_usuario:
+                usuarios.append(match["id_usuario_1"])
+    return usuarios
+
 def obtener_usuario_por_id(id_usuario):
     # Aquí buscamos el usuario por su ID en la base de datos, en este caso lo hacemos con JSON.
     with open('db/usuarios.json') as f:
@@ -30,6 +50,23 @@ def ya_existe_match_o_rechazo(id1, id2):
         ) and match["estado"] in ["aceptado", "rechazado"]:
             return True
     return False
+
+def tiene_match(id1, id2):
+    matches_path = 'db/matches.json'
+    
+    # Cargar los matches existentes
+    matches = []
+    if os.path.exists(matches_path):
+        with open(matches_path, 'r') as f:
+            matches = json.load(f)
+    for match in matches:
+        if (
+            (match["id_usuario_1"] == id1 and match["id_usuario_2"] == id2) or
+            (match["id_usuario_1"] == id2 and match["id_usuario_2"] == id1)
+        ) and match["estado"] in ["aceptado"]:
+            return True
+    return False
+
 
 def verificar_compatibilidad_edad(usuario1, usuario2):
     # Definimos los rangos de edad
