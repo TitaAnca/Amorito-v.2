@@ -5,23 +5,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chat en la Sala</title>
-    <link rel="stylesheet" href="css/chat.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/chat.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body data-id="{{ id_usuario }}">
+    <div class="sidebar">
+        <a href="../perfil/{{ id_usuario }}"><i class="fas fa-user"></i></a>
+        <a href="/matches/{{ id_usuario }}"><i class="fas fa-heart"></i></a>
+        <a href="/chat/{{ id_usuario }}"><i class="fas fa-comment-alt"></i></a>
+        <a href="/cerrar_sesion"><i class="fas fa-sign-out-alt"></i></a>
+    </div>
+
     <div id="chat">
-        <!--<div class="cabecero">
-        
-        <h2><span id="room-name"></span></h2>
-        <a href="/"><button class="volver">Inicio</button></a>
-      </div> -->
         <div class="cabecero">
-            <i class="icono icono-usuario fas fa-user"></i>
-            <h2>Nombre del match</h2>
-            <i class="icono icono-telefono fas fa-phone"></i>
+            <h2 id="nombre-match">Selecciona un match</h2>
         </div>
 
         <div id="status-mensaje"></div>
@@ -32,10 +32,14 @@
         </div>
     </div>
 
+    <div id="matches-bar" class="matches-bar">
+        <h3>Tus Matches</h3>
+        <ul id="matches-list"></ul> <!-- Aquí aparecerán los usuarios con los que tienes match -->
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="js/chat.js"></script>
+    <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+    <script src="{{ url_for('static', filename='js/chat.js') }}"></script>
 </body>
 
 </html>
