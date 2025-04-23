@@ -21,20 +21,19 @@
 
     <div class="profile-wrapper">
         <div class="profile-image-container">
-            <img id="profile-pic" src="https://i.pinimg.com/736x/cb/9b/e4/cb9be4fe216f38345af5ff6b6532fdc8.jpg"
-                alt="Foto de Perfil">
+            <img id="profile-pic" src="" alt="Foto de Perfil">
         </div>
 
         <div class="profile-card">
-            <h2 id="username">NOMBRE DE USUARIO</h2>
+            <h2 id="username"></h2>
             
-            <p><strong>Id de usuario:</strong> <span id="handle">ID USUARIO</span></p>
-            <p><strong>Edad:</strong> <span id="location">EDAD</span></p>
-            <p><strong>Género:</strong> <span id="member-date">GENERO</span></p>
-            <p><strong>Orientación sexual:</strong> <span id="interests">ORIENTACION SEXUAL</span></p>
+            <p><strong>Id de usuario:</strong> <span id="handle"></span></p>
+            <p><strong>Edad:</strong> <span id="location"></span></p>
+            <p><strong>Género:</strong> <span id="member-date"></span></p>
+            <p><strong>Orientación sexual:</strong> <span id="interests"></span></p>
         
             <button id="edit-btn">Editar perfil</button>
-            <button id="delete-btn">Eliminar perfil</button>
+            <button id="delete-btn">Eliminar cuenta</button>
         </div>
         
     </div>
@@ -46,6 +45,11 @@
             <h2>Editar Perfil</h2>
             <label>Nombre de Usuario:</label>
             <input type="text" id="nombre_usuario" name="nombre_usuario" required placeholder="Ej: Ana Melano">
+            <div class="contrasena">
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena" required
+                    placeholder="¡Recuerda poner una contraseña segura!">
+            </div>
             <div>
                 <label for="edad">Edad:</label>
                 <input type="number" id="edad" name="edad" required min="18" max="90"
@@ -77,7 +81,6 @@
             <div class="foto-container">
                 <label for="foto_perfil">Foto de Perfil:</label>
                 <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*" required>
-                <label for="foto_perfil" class="foto-perfil-btn">Seleccionar Foto</label>
             </div>
             <button id="save-btn">Guardar cambios</button>
         </div>

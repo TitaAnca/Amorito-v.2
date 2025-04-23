@@ -149,9 +149,6 @@ select {
     font-family: 'Fira Code';
     transition: all 0.3s ease-in-out;
     margin-top: 20px;
-    margin-left: 50px;
-    align-items: center;
-
 }
 
 .profile-card button:hover {
@@ -170,7 +167,7 @@ select {
     position: fixed;
     z-index: 1000;
     width: 500px;
-    height: 500px;
+    height: 550px;
     align-items: right;
     text-align: center;
     margin-top: 30px;

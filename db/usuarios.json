@@ -1,12 +1,12 @@
 [
     {
         "id_usuario": "carlitos123",
-        "nombre_usuario": "Carlitos",
-        "contrasena": "1234",
-        "edad": 20,
+        "nombre_usuario": "Carlos",
+        "contrasena": "12345",
+        "edad": 19,
         "genero": "masculino",
         "orientacion_sexual": "heterosexual",
-        "bio": "hola",
+        "bio": "Hola",
         "foto_perfil": "static/Imagenes/perfiles/carlitos123_perfil_prueba.jpg"
     },
     {

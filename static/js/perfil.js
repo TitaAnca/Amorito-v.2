@@ -1,3 +1,42 @@
+const cargarPerfil = async () => {
+    try {
+        const idUsuario = document.body.dataset.id; // Obtener el ID del usuario
+        const res = await fetch(`/usuario/obtener/${idUsuario}`);
+        const perfil = await res.json();
+
+        if (perfil.mensaje) {
+            // Si no se encuentra el usuario
+            console.error(perfil.mensaje);
+        } else {
+            mostrarPerfil(perfil);
+        }
+    } catch (error) {
+        console.error("Error cargando el perfil del usuario:", error);
+    }
+};
+
+// Mostrar el perfil actual
+const mostrarPerfil = (perfil) => {
+    // Mostrar los datos del perfil en la página
+    document.getElementById("username").textContent = perfil.nombre_usuario;
+    document.getElementById("handle").textContent = perfil.id_usuario;
+    document.getElementById("location").textContent = perfil.edad;
+    document.getElementById("member-date").textContent = perfil.genero;
+    document.getElementById("interests").textContent = perfil.orientacion_sexual;
+
+    // Si hay foto de perfil, actualizar la imagen
+    if (perfil.foto_perfil) {
+        document.querySelector(".profile-image-container img").src = "/static" + perfil.foto_perfil.replace('static', '');
+    } else {
+        // Si no tiene foto, mostrar una imagen por defecto
+        document.querySelector(".profile-image-container img").src = "/static/img/default-profile.png";
+    }
+};
+
+// Llamada inicial para cargar el perfil cuando se carga la página
+document.addEventListener("DOMContentLoaded", () => {
+    cargarPerfil();
+});
 document.addEventListener("DOMContentLoaded", () => {
     const editBtn = document.getElementById("edit-btn");
     const deleteBtn = document.getElementById("delete-btn");
@@ -17,6 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const editOrientacion = document.getElementById("orientacion_sexual");
     const editBio = document.getElementById("bio");
     const editFoto = document.getElementById("foto_perfil");
+    const editContra = document.getElementById("contrasena");
 
     // Mostrar el modal al hacer clic en editar
     editBtn.addEventListener("click", () => {
@@ -33,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const nombre_usuario = editUsername.value.trim();
         const edad = parseInt(editEdad.value);
         const genero = editGenero.value;
+        const contrasena = editContra.value;
         const orientacion = editOrientacion.value;
         const bio = editBio.value.trim();
         const foto = editFoto.files[0];
@@ -42,7 +83,10 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Por favor, ingresa un nombre de usuario.");
             return;
         }
-
+        if (!contrasena) {
+            alert("Por favor, ingrese una contraseña.");
+            return;
+        }
         if (isNaN(edad) || edad < 18 || edad > 90) {
             alert("Por favor, ingresa una edad válida entre 18 y 90.");
             return;
@@ -52,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Por favor, selecciona un género.");
             return;
         }
-
+        
         if (!orientacion) {
             alert("Por favor, selecciona una orientación sexual.");
             return;
@@ -72,6 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const formData = new FormData();
         formData.append("id_usuario", id_usuario);
         formData.append("nombre_usuario", nombre_usuario);
+        formData.append("contrasena", contrasena);
         formData.append("edad", edad);
         formData.append("genero", genero);
         formData.append("orientacion_sexual", orientacion);
@@ -133,23 +178,4 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-async function cargarPerfilUsuario() {
-    fetch("/usuario/obtener/usuario123")  // Aquí pones el ID del usuario que se desea obtener
-        .then(response => response.json())
-        .then(perfil => {
-            // Cargar los datos del usuario en la tarjeta de perfil
-            document.getElementById("username").innerText = perfil.nombre_usuario;
-            document.getElementById("handle").innerText = perfil.id_usuario;
-            document.getElementById("location").innerText = perfil.edad;
-            document.getElementById("member-date").innerText = perfil.genero;
-            document.getElementById("interests").innerText = perfil.orientacion_sexual;
 
-            // Actualizar la foto de perfil
-            document.querySelector(".profile-image-container img").src = "/static" + perfil.foto_perfil.replace('static', '');
-        })
-        .catch(error => console.error("Error al obtener los datos del usuario:", error));
-
-}
-
-// Llamamos a la función al cargar la página
-document.addEventListener("DOMContentLoaded", cargarPerfilUsuario);
