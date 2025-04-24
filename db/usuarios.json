@@ -14,7 +14,7 @@
         "nombre_usuario": "Valeria Garza",
         "contrasena": "12345",
         "edad": 32,
-        "genero": "masculino",
+        "genero": "femenino",
         "orientacion_sexual": "heterosexual",
         "bio": "Hagamos que nuestro d\u00fao sea el m\u00e1s letal de Warzone, sin necesidad de respawnear. \ud83c\udfae",
         "foto_perfil": "static/Imagenes/perfiles/Val01_Valeria_pfp.jpg"
@@ -24,7 +24,7 @@
         "nombre_usuario": "Ellie Williams",
         "contrasena": "12345",
         "edad": 32,
-        "genero": "masculino",
+        "genero": "femenino",
         "orientacion_sexual": "heterosexual",
         "bio": "De ser un zombie no me habr\u00eda importado darte un mordisco.",
         "foto_perfil": "static/Imagenes/perfiles/Ellie01_ellie_the_last_of_us.jpg"
