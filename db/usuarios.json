@@ -58,5 +58,15 @@
         "orientacion_sexual": "heterosexual",
         "bio": "Si los idiotas pudieran volar, esto ser\u00eda un aeropuerto.",
         "foto_perfil": "static/Imagenes/perfiles/Prueba_6ba6ad888a6573450ee1fa89005f6038.jpg"
+    },
+    {
+        "id_usuario": "Benito01",
+        "nombre_usuario": "Benito",
+        "contrasena": "12345",
+        "edad": 31,
+        "genero": "masculino",
+        "orientacion_sexual": "heterosexual",
+        "bio": "Tu conejo malo",
+        "foto_perfil": "static/Imagenes/perfiles/Benito01_benito.jpg"
     }
 ]
