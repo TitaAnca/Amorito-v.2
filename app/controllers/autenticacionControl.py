@@ -1,14 +1,7 @@
-from flask import request, jsonify
-from werkzeug.utils import secure_filename
+from flask import request, jsonify, redirect, url_for
 from app.servicios.usuarioServicio import registrar_usuario, iniciar_sesion
-from flask import redirect, url_for
 
-# Ruta de registro
-from flask import request, jsonify
-from werkzeug.utils import secure_filename
-from app.servicios.usuarioServicio import registrar_usuario
 
-# Ruta de registro
 def registrar_usuario_controlador():
     # Obtener los datos del formulario
     id_usuario = request.form.get('id_usuario')
@@ -30,16 +23,12 @@ def registrar_usuario_controlador():
     except ValueError:
         return jsonify({"mensaje": "La edad debe ser un número válido"}), 400
 
-    
-     # Obtener la foto subida
-
     # Registrar al usuario
     if registrar_usuario(id_usuario, nombre_usuario, contrasena, edad, genero, orientacion_sexual, bio, foto_perfil):
         return jsonify({"mensaje": "Usuario registrado correctamente"}), 201
     else:
         return jsonify({"mensaje": "El usuario ya existe o los datos no son válidos"}), 400
 
-# Ruta de inicio de sesión
 def iniciar_sesion_controlador():
     datos = request.get_json()
 
@@ -52,7 +41,6 @@ def iniciar_sesion_controlador():
 
     # Verificar si el inicio de sesión es exitoso
     if iniciar_sesion(id_usuario, contrasena):
-        # Redirigir a la página de Matches con el id_usuario
         return redirect(url_for('matches', id_usuario=id_usuario))
     else:
         return jsonify({"mensaje": "Usuario o contraseña incorrectos"}), 401

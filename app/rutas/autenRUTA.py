@@ -8,8 +8,6 @@ autent_bp = Blueprint('auth', __name__, url_prefix='/auth')
 def mostrar_registro():
     print("Accediendo a la página de registro")  # Ver si la ruta está siendo alcanzada
     return render_template('Registro.html')
-# Ruta para procesar el registro del usuario (POST)
-autent_bp.route('/registrar', methods=['POST'])(registrar_usuario_controlador)
 
-# Ruta para el inicio de sesión (POST)
+autent_bp.route('/registrar', methods=['POST'])(registrar_usuario_controlador)
 autent_bp.route('/iniciar-sesion', methods=['POST'])(iniciar_sesion_controlador)

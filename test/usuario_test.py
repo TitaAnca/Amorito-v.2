@@ -4,7 +4,6 @@ from app import create_app
 class UserTestCase(unittest.TestCase):
 
     def setUp(self):
-        """Configuramos la aplicación para los tests."""
         self.app = create_app()
         self.client = self.app.test_client()
 
@@ -13,7 +12,7 @@ class UserTestCase(unittest.TestCase):
         with open('static/Imagenes/perfiles/carlitos123_perfil_prueba.jpg', 'rb') as foto:
             response = self.client.put('/usuario/actualizar', 
                 data={
-                    'id_usuario': 'carlitos123',  # ID del usuario a actualizar
+                    'id_usuario': 'carlitos123',
                     'nombre_usuario': 'Carlos',
                     'contrasena': '67890',
                     'edad': '20',
@@ -33,13 +32,13 @@ class UserTestCase(unittest.TestCase):
             response = self.client.put('/usuario/actualizar', 
                 data={
                     'id_usuario': 'carlitos123',
-                    'nombre_usuario': '',  # Nombre de usuario vacío, lo cual es inválido
+                    'nombre_usuario': '',
                     'contrasena': '67890',
                     'edad': '20',
                     'genero': 'masculino',
                     'orientacion_sexual': 'heterosexual',
                     'bio': 'Actualizando mi perfil!',
-                    'foto_perfil': (foto, 'foto_perfil.jpg')  # Imagen real de Carlos
+                    'foto_perfil': (foto, 'foto_perfil.jpg')
                 }
             )
         
@@ -51,14 +50,14 @@ class UserTestCase(unittest.TestCase):
         with open('static/Imagenes/perfiles/carlitos123_perfil_prueba.jpg', 'rb') as foto:
             response = self.client.put('/usuario/actualizar', 
                 data={
-                    'id_usuario': 'usuario_inexistente',  # ID de usuario que no existe
+                    'id_usuario': 'usuario_inexistente',
                     'nombre_usuario': 'NoExistente',
                     'contrasena': '67890',
                     'edad': '20',
                     'genero': 'masculino',
                     'orientacion_sexual': 'heterosexual',
                     'bio': 'Este usuario no existe',
-                    'foto_perfil': (foto, 'foto_perfil.jpg')  # Imagen real de Carlos
+                    'foto_perfil': (foto, 'foto_perfil.jpg')
                 }
             )
         

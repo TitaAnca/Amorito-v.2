@@ -23,12 +23,11 @@ def obtener_usuarios_con_match(id_usuario):
     return usuarios
 
 def obtener_usuario_por_id(id_usuario):
-    # Aquí buscamos el usuario por su ID en la base de datos, en este caso lo hacemos con JSON.
     with open('db/usuarios.json') as f:
         usuarios = json.load(f)
     return next((usuario for usuario in usuarios if usuario['id_usuario'] == id_usuario), None)
 
-def actualizar_matches(matches):
+def actualizar_matches(matches): #guardar cambios
     try:
         with open('db/matches.json', 'w') as f:
             json.dump(matches, f, indent=4)
@@ -38,7 +37,7 @@ def actualizar_matches(matches):
 def ya_existe_match_o_rechazo(id1, id2):
     matches_path = 'db/matches.json'
     
-    # Cargar los matches existentes
+    # Cargar matches existentes
     matches = []
     if os.path.exists(matches_path):
         with open(matches_path, 'r') as f:
@@ -53,8 +52,6 @@ def ya_existe_match_o_rechazo(id1, id2):
 
 def tiene_match(id1, id2):
     matches_path = 'db/matches.json'
-    
-    # Cargar los matches existentes
     matches = []
     if os.path.exists(matches_path):
         with open(matches_path, 'r') as f:
@@ -69,7 +66,6 @@ def tiene_match(id1, id2):
 
 
 def verificar_compatibilidad_edad(usuario1, usuario2):
-    # Definimos los rangos de edad
     rangos_edad = [
         (18, 25),
         (25, 35),
@@ -82,8 +78,8 @@ def verificar_compatibilidad_edad(usuario1, usuario2):
     # Determinamos en qué rango de edad está cada uno
     rango_usuario1 = next((r for r in rangos_edad if r[0] <= edad_usuario1 <= r[1]), None)
     rango_usuario2 = next((r for r in rangos_edad if r[0] <= edad_usuario2 <= r[1]), None)
-    # Comprobamos si ambos usuarios están en el mismo rango de edad
-    return rango_usuario1 == rango_usuario2
+
+    return rango_usuario1 == rango_usuario2 #devuelve true o false
 
 def obtener_generos_atraidos(orientacion, genero_propio):
     if orientacion == "heterosexual":
@@ -120,7 +116,7 @@ def obtener_usuarios_compatibles(id_usuario):
     for otro in todos:
         if otro['id_usuario'] != id_usuario:
             if ya_existe_match_o_rechazo(id_usuario, otro['id_usuario']):
-                continue  # Ya existe un match o rechazo, no es compatible
+                continue
 
             if verificar_compatibilidad_edad(usuario, otro) and verificar_preferencias(usuario, otro):
                 compatibles.append({
@@ -142,24 +138,22 @@ def crear_match(id_usuario1, id_usuario2):
         return None
 
     matches_path = 'db/matches.json'
-    
-    # Cargar los matches existentes
     matches = []
     if os.path.exists(matches_path):
         with open(matches_path, 'r') as f:
             matches = json.load(f)
 
-    # Buscar si ya existe un match inverso
+    # match inverso?
     if matches: 
         for match in matches:
             if match['id_usuario_1'] == id_usuario2 and match['id_usuario_2'] == id_usuario1:
                 if match['estado'] == 'pendiente':
                     match['estado'] = 'aceptado'
-                    actualizar_matches(matches)  # Guardar los cambios en el archivo
+                    actualizar_matches(matches) 
                     return Match(id_usuario1, id_usuario2, 'aceptado', match['datos_match'])
                 elif match['estado'] == 'pendienteRechazo':
                     match['estado'] = 'rechazado'
-                    actualizar_matches(matches)  # Guardar los cambios en el archivo
+                    actualizar_matches(matches)
                     return Match(id_usuario1, id_usuario2, 'rechazado', match['datos_match'])
 
     # Si no existe el inverso, lo creamos como pendiente
@@ -174,11 +168,10 @@ def crear_match(id_usuario1, id_usuario2):
 
     nuevo_match = Match(id_usuario1, id_usuario2, 'pendiente', datos_match)
     matches.append(nuevo_match.__dict__)
-    actualizar_matches(matches)  # Guardar el nuevo match
+    actualizar_matches(matches)
     return nuevo_match
 
 
-# Función para rechazar un match
 def rechazar_match(id_usuario1, id_usuario2):
     usuario1 = obtener_usuario_por_id(id_usuario1)
     usuario2 = obtener_usuario_por_id(id_usuario2)
@@ -187,23 +180,20 @@ def rechazar_match(id_usuario1, id_usuario2):
         return None
 
     matches_path = 'db/matches.json'
-    
-    # Cargar los matches existentes
     matches = []
     if os.path.exists(matches_path):
         with open(matches_path, 'r') as f:
             matches = json.load(f)
 
-    # Buscar si ya existe un match inverso
     for match in matches:
         if match['id_usuario_1'] == id_usuario2 and match['id_usuario_2'] == id_usuario1:
             if match['estado'] == 'pendiente':
                 match['estado'] = 'rechazado'
-                actualizar_matches(matches)  # Guardar los cambios en el archivo
+                actualizar_matches(matches)
                 return Match(id_usuario1, id_usuario2, 'rechazado', match['datos_match'])
             elif match['estado'] == 'pendienteRechazo':
                 match['estado'] = 'rechazado'
-                actualizar_matches(matches)  # Guardar los cambios en el archivo
+                actualizar_matches(matches)
                 return Match(id_usuario1, id_usuario2, 'rechazado', match['datos_match'])
 
     # Si no existe el inverso, lo creamos como pendiente de rechazo
@@ -218,5 +208,5 @@ def rechazar_match(id_usuario1, id_usuario2):
 
     nuevo_match = Match(id_usuario1, id_usuario2, 'pendienteRechazo', datos_match)
     matches.append(nuevo_match.__dict__)
-    actualizar_matches(matches)  # Guardar el nuevo match
+    actualizar_matches(matches)
     return nuevo_match

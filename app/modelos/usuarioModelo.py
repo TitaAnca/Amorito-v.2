@@ -39,7 +39,7 @@ class Usuario:
             if orientacion_sexual not in self.ORIENTACIONES_VALIDAS:
                 raise ValueError("Orientación sexual no válida")
             self.orientacion_sexual = orientacion_sexual
-        if bio is not None:  # Permitir la actualización de la bio
+        if bio is not None:
             self.bio = bio
         if foto_perfil:
-            self.foto_perfil = foto_perfil  # Actualizar la foto de perfil
+            self.foto_perfil = foto_perfil
