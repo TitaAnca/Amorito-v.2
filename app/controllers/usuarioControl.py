@@ -20,7 +20,11 @@ def actualizar_usuario_controlador():
 
         if not id_usuario:
             return jsonify({"mensaje": "El ID de usuario es obligatorio"}), 400
-
+        if not nombre_usuario:
+            return jsonify({"mensaje": "El nombre de usuario es obligatorio"}), 400
+        if edad and int(edad) < 0:
+            return jsonify({"mensaje": "La edad no puede ser negativa"}), 400
+        
         resultado = actualizar_usuario(
             id_usuario, nombre_usuario, contrasena, int(edad) if edad else None,
             genero, orientacion_sexual, bio, foto
@@ -40,12 +44,12 @@ def actualizar_usuario_controlador():
 def obtener_usuario_controlador(id_usuario):
     usuario = obtener_usuario_por_nombre(id_usuario)
     if usuario:
-        return jsonify(usuario), 200  # Si lo encuentra, devuelve los datos
+        return jsonify(usuario), 200
     else:
-        return jsonify({"mensaje": "Usuario no encontrado"}), 404  # Si no lo encuentra, mensaje de error
+        return jsonify({"mensaje": "Usuario no encontrado"}), 404
 
 def eliminar_usuario_controlador(id_usuario):
     if eliminar_usuario(id_usuario):
         return jsonify({"mensaje": "Usuario eliminado correctamente"}), 200
     else:
-        return jsonify({"mensaje": "No se pudo eliminar el usuario"}), 400
+        return jsonify({"mensaje": "No se pudo eliminar el usuario"}), 404
