@@ -118,7 +118,7 @@ def obtener_usuarios_compatibles(id_usuario):
             if ya_existe_match_o_rechazo(id_usuario, otro['id_usuario']):
                 continue
 
-            if verificar_compatibilidad_edad(usuario, otro) and verificar_preferencias(usuario, otro):
+            if verificar_compatibilidad_edad(usuario, otro) and verificar_preferencias(usuario, otro) and ya_existe_match_o_rechazo(usuario, otro):
                 compatibles.append({
                     "id_usuario": otro.get('id_usuario'),
                     "nombre": otro.get('nombre_usuario'),

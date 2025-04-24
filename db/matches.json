@@ -11,5 +11,44 @@
             "genero_usuario1": "femenino",
             "genero_usuario2": "masculino"
         }
+    },
+    {
+        "id_usuario_1": "Prueba",
+        "id_usuario_2": "Joel01",
+        "estado": "pendienteRechazo",
+        "datos_match": {
+            "edad_usuario1": 32,
+            "edad_usuario2": 32,
+            "preferencia_usuario1": "heterosexual",
+            "preferencia_usuario2": "heterosexual",
+            "genero_usuario1": "femenino",
+            "genero_usuario2": "masculino"
+        }
+    },
+    {
+        "id_usuario_1": "Prueba",
+        "id_usuario_2": "Joel01",
+        "estado": "pendienteRechazo",
+        "datos_match": {
+            "edad_usuario1": 32,
+            "edad_usuario2": 32,
+            "preferencia_usuario1": "heterosexual",
+            "preferencia_usuario2": "heterosexual",
+            "genero_usuario1": "femenino",
+            "genero_usuario2": "masculino"
+        }
+    },
+    {
+        "id_usuario_1": "Prueba",
+        "id_usuario_2": "Joel01",
+        "estado": "pendiente",
+        "datos_match": {
+            "edad_usuario1": 32,
+            "edad_usuario2": 32,
+            "preferencia_usuario1": "heterosexual",
+            "preferencia_usuario2": "heterosexual",
+            "genero_usuario1": "femenino",
+            "genero_usuario2": "masculino"
+        }
     }
 ]
