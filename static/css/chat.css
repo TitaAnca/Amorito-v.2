@@ -100,7 +100,7 @@ body {
 .cabecero {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 
     background-color: #a03131;
     padding: 10px 15px;
