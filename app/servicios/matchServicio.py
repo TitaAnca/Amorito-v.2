@@ -48,6 +48,10 @@ def ya_existe_match_o_rechazo(id1, id2):
             (match["id_usuario_1"] == id2 and match["id_usuario_2"] == id1)
         ) and match["estado"] in ["aceptado", "rechazado"]:
             return True
+        if (
+            (match["id_usuario_1"] == id1 and match["id_usuario_2"] == id2)
+        ) and match["estado"] in ["pendiente", "pendienteRechazo"]:
+            return True
     return False
 
 def tiene_match(id1, id2):
@@ -118,7 +122,7 @@ def obtener_usuarios_compatibles(id_usuario):
             if ya_existe_match_o_rechazo(id_usuario, otro['id_usuario']):
                 continue
 
-            if verificar_compatibilidad_edad(usuario, otro) and verificar_preferencias(usuario, otro) and not ya_existe_match_o_rechazo(usuario, otro):
+            if verificar_compatibilidad_edad(usuario, otro) and verificar_preferencias(usuario, otro):
                 compatibles.append({
                     "id_usuario": otro.get('id_usuario'),
                     "nombre": otro.get('nombre_usuario'),

@@ -11,6 +11,7 @@ def create_app():
                 static_folder="../static",  # Archivos estáticos (CSS, JS)
                 template_folder="../templates")  # Plantillas HTML
     # Configuración de la aplicación (Cargar configuración del entorno)
+    app.config.from_pyfile('config.py')
     @app.route('/')
     def index():
         return render_template('Inicio.html')  # Cambiado a test.html para probar
